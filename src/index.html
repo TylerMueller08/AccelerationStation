@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rapid Acceleration Station</title>
+    <link rel="stylesheet" href="index.css"/>
+    <script defer src="appFunctions.js"></script>
+  </head>
+  <body>
+    <!--PreLoader-->
+    <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+    </div>
+
+    <div id="blob"></div>
+    <div id="blur"></div>
+
+    <div class="primaryApplication">
+      <div class="navigationBar">
+        <div class="titleBar">
+          <button id="showHidenMenu" class="toggleButton"></button>
+          <div class="title">
+            Rapid Acceleration Station
+          </div>
+        </div>
+        <div class="titleBarButtons">
+          <button id="minimizeButton" class="navigationButton minimizeButton"></button>
+          <button id="maximizeButton" class="navigationButton maximizeButton"></button>
+          <button id="closeButton" class="navigationButton closeButton"></button>
+        </div>
+      </div>
+      <div class="contentArea">
+        <div id="sidebar" class="leftMenu">
+          <p>Sidebar Text</p>
+        </div>
+
+        <div class="contentPages">
+          <!-- <p>Context Text</p> -->
+          <div style="padding:20px 10px;margin-bottom:5px;background:#313338;">
+            <style>
+              .custom {
+                --frc-gyro-color: #fff;
+                --frc-gyro-dial-color: yellow;
+              }
+            </style>
+            <frc-gyro class="custom" value="0" precision="2"></frc-gyro>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="frc-web-components/frc-web-components.min.js"></script>
+  </body>
+</html>
