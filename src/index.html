@@ -26,8 +26,9 @@
     <main class="main">
       <div class="card">
         <h1>Robot Information</h1>
-        <p id="robot-state">Connection: Unknown</p>
-        <p id="timer">Time Remaining: -1</p>
+        <p id="robot-state">Connection: Disconnected</p>
+        <p id="timer">Time Remaining: 0:00</p>
+        <p id="can-utilization">CAN Utilization: 0%</p>
       </div>
       <div class="card">
         <h1>Camera</h1>
@@ -35,11 +36,22 @@
       </div>
       <div class="card">
         <h1>Faults Detected</h1>
-        <p>Radio Connection: </p>
-        <p>Robot Code: </p>
-        <p>Shooter: </p>
-        <p>Intake: </p>
-        <p>Encoder: </p>
+        <div class="status-grid">
+          <p class="fault-name">Radio Connection: </p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Robot Code:</p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Joysticks: </p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Shooter Motors: </p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Intake Motors: </p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Primary Encoder: </p>
+          <div class="fault-status"></div>
+          <p class="fault-name">Backup Encoder: </p>
+          <div class="fault-status"></div>
+        </div>
       </div>
       <div class="card">
         <h1>Auto Selector</h1>
@@ -50,9 +62,42 @@
       </div>
       <div class="card">
         <h1>Ready for Match</h1>
+        <div class="switch-grid">
+          <p class="switch-name">Arm States</p>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <p class="switch-name">Functions</p>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          <p class="switch-name">Battery</p>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
       <div class="card">
         <h1>Robot States</h1>
+        <div class="states-grid">
+          <p class="state-name">Arm State: </p>
+          <p class="state-text">Intake</p>
+          <p class="state-name">Movement: </p>
+          <p class="state-text">Traveling</p>
+          <p class="state-name">Primary Ec: </p>
+          <p class="state-text">0.0</p>
+          <p class="state-name">Backup Ec: </p>
+          <p class="state-text">0.0</p>
+          <p class="state-name">Bottom LS: </p>
+          <div class="fault-status"></div>
+          <p class="state-name">Top LS: </p>
+          <div class="fault-status"></div>
+          <p class="state-name">Intake LS: </p>
+          <div class="fault-status"></div>
+        </div>
       </div>
       <div class="card"></div>
     </main>

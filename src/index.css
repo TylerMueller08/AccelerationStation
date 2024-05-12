@@ -24,12 +24,13 @@ h1 {
   font-size: 15pt;
   font-weight: normal;
   letter-spacing: 1px;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 p {
   font-size: 11pt;
   color: #E6E6E6;
+  letter-spacing: 1px;
 }
 
 body.left-menu-active {
@@ -113,7 +114,7 @@ body.left-menu-active {
   width: 100%;
   line-height: 30px;
   padding-top: 8px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   -webkit-app-region: drag;
 }
 
@@ -172,6 +173,8 @@ body.left-menu-active {
 .card:nth-child(1) > p {
   text-align: left;
   padding-left: 30px;
+  font-size: 12pt;
+  padding-bottom: 10px;
 }
 
 .card:nth-child(2) {
@@ -197,9 +200,37 @@ body.left-menu-active {
 }
 
 .card:nth-child(3) > p {
-  text-align: left;
   padding-left: 30px;
 }
+
+.card:nth-child(3) > h1 {
+  padding-bottom: 0px;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  
+}
+
+.fault-name {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.fault-status {
+  margin: auto 30px auto auto;
+  width: 22px;
+  height: 22px;
+  background-color: red;
+  border-radius: 25px;
+  border: 3px solid white;
+}
+
+/* .fault-status:nth-child(2) {
+  background-color: green;
+} */
 
 .card:nth-child(4) {
   grid-area: c4;
@@ -221,8 +252,102 @@ body.left-menu-active {
   grid-area: c5;
 }
 
+.card:nth-child(5) > h1 {
+  padding-bottom: 0px;
+}
+
+.switch-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.switch-name {
+  text-align: left;
+  margin-left: 30px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  margin-bottom: 20px;
+  position: relative;
+  /* display: inline-block; */
+  width: 50px;
+  height: 28px;
+  margin: auto 30px auto auto;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: green;
+}
+
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 35px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 .card:nth-child(6) {
   grid-area: c6;
+}
+
+.states-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 0px;
+}
+
+.state-name {
+  text-align: left;
+  margin-left: 30px;
+}
+
+.state-text {
+  text-align: right;
+  margin-right: 30px;
 }
 
 .card:nth-child(7) {
