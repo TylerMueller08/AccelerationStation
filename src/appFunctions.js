@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron')
-const sidebar = document.getElementById('sidebar');
-const ipc = ipcRenderer
+const ipc = ipcRenderer;
 var isLeftMenuActive = false;
 
 // Close Application
@@ -20,26 +19,15 @@ maximizeButton.addEventListener('click', () => {
 
 // Toggle Menu
 showHidenMenu.addEventListener('click', () =>  {
+    const body = document.getElementsByTagName('body')[0];
+    const main = document.getElementsByTagName('main')[0];
     if (!isLeftMenuActive) {
-        sidebar.style.width = '280px';
-        sidebar.style.visibility = "visible";
+        body.classList.add('left-menu-active');
+        main.style = 'filter: brightness(50%)'
         isLeftMenuActive = true;
     } else {
-        sidebar.style.width = '0px';
-        sidebar.style.visibility = "hidden";
+        body.classList.remove('left-menu-active');
+        main.style = 'filter: brightness(100%)'
         isLeftMenuActive = false;
     }
 })
-
-ipcRenderer.on('start-animation', () => {
-    sidebar.style.width = '0px';
-    sidebar.style.visibility = "hidden";
-
-    const loader = document.getElementsByClassName('loader-wrapper')[0];
-    loader.style.transition = 'opacity 1.25s ease-in';
-    loader.style.opacity = '0';
-
-    loader.addEventListener('transitionend', () => {
-        loader.remove();
-    })
-});

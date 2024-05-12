@@ -7,15 +7,7 @@
     <script defer src="appFunctions.js"></script>
   </head>
   <body>
-    <!--PreLoader-->
-    <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-
-    <div id="blob"></div>
-    <div id="blur"></div>
-
-    <div class="primaryApplication">
+    <header class="header">
       <div class="navigationBar">
         <div class="titleBar">
           <button id="showHidenMenu" class="toggleButton"></button>
@@ -29,25 +21,42 @@
           <button id="closeButton" class="navigationButton closeButton"></button>
         </div>
       </div>
-      <div class="contentArea">
-        <div id="sidebar" class="leftMenu">
-          <p>Sidebar Text</p>
-        </div>
-
-        <div class="contentPages">
-          <!-- <p>Context Text</p> -->
-          <div style="padding:20px 10px;margin-bottom:5px;background:#313338;">
-            <style>
-              .custom {
-                --frc-gyro-color: #fff;
-                --frc-gyro-dial-color: yellow;
-              }
-            </style>
-            <frc-gyro class="custom" value="0" precision="2"></frc-gyro>
-          </div>
-        </div>
+    </header>
+    <section class="sidebar"></section>
+    <main class="main">
+      <div class="card">
+        <h1>Robot Information</h1>
+        <p id="robot-state">Connection: Unknown</p>
+        <p id="timer">Time Remaining: -1</p>
       </div>
-    </div>
+      <div class="card">
+        <h1>Camera</h1>
+        <div id="camera"></div>
+      </div>
+      <div class="card">
+        <h1>Faults Detected</h1>
+        <p>Radio Connection: </p>
+        <p>Robot Code: </p>
+        <p>Shooter: </p>
+        <p>Intake: </p>
+        <p>Encoder: </p>
+      </div>
+      <div class="card">
+        <h1>Auto Selector</h1>
+        <p>Select an Autonomous Below</p>
+        <select id="auto-selector">
+          <option>No Autonomous Found</option>
+        </select>
+      </div>
+      <div class="card">
+        <h1>Ready for Match</h1>
+      </div>
+      <div class="card">
+        <h1>Robot States</h1>
+      </div>
+      <div class="card"></div>
+    </main>
+
     <script src="frc-web-components/frc-web-components.min.js"></script>
   </body>
 </html>
