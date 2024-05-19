@@ -6,7 +6,16 @@
 body {
   font-family: 'mokoto';
   color: white;
+  background-color: #1E1F22;
 
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.root {
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -18,6 +27,7 @@ body {
   grid-template-areas: 
     "header header"
     "main main";
+  overflow: hidden;
 }
 
 h1 {
@@ -33,23 +43,34 @@ p {
   letter-spacing: 1px;
 }
 
-body.left-menu-active {
-  grid-template-areas: "side header" "side main";
-}
-
 .header {
   background-color: #2B2D31;
   grid-area: header;
 }
 
 .sidebar {
+  position: absolute;
   background-color: #1E1F22;
-  grid-area: side;
+  height: 100vh;
+  width: 0;
+  position: absolute;
+  transition: 0.8s;
+  z-index: 100000;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  visibility: hidden;
+}
+
+#sidebarText {
+  position: relative;
+  left: -350px;
+  text-align: center;
+  font-size: 22pt;
+  letter-spacing: 5px;
 }
 
 .main {
-  transition: all 0.25s ease;
-
+  transition: all 0.8s ease;
   background-color: #313338;
   padding: 25px;
   grid-area: main;
@@ -68,6 +89,14 @@ body.left-menu-active {
   background-color: #494b52;
   border-radius: 10px;
   text-align: center;
+}
+
+.true {
+  background-color: green;
+}
+
+.false {
+  background-color: red;
 }
 
 .header > .navigationBar {
@@ -113,8 +142,7 @@ body.left-menu-active {
   margin-left: 10px;
   width: 100%;
   line-height: 30px;
-  padding-top: 8px;
-  padding-bottom: 10px;
+  padding-top: 2px;
   -webkit-app-region: drag;
 }
 
@@ -223,7 +251,7 @@ body.left-menu-active {
   margin: auto 30px auto auto;
   width: 22px;
   height: 22px;
-  background-color: red;
+  /* background-color: red; */
   border-radius: 25px;
   border: 3px solid white;
 }

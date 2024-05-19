@@ -3,13 +3,13 @@
   "productName": "accelerationstation",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "eslint --ext .ts,.tsx ."
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.4.0",
@@ -19,8 +19,23 @@
     "@electron-forge/maker-zip": "^7.4.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron-forge/plugin-webpack": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "30.0.1"
+    "@types/react": "^18.3.2",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "css-loader": "^6.11.0",
+    "electron": "30.0.6",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
+    "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "node-loader": "^2.0.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~4.5.4"
   },
   "keywords": [],
   "author": {
@@ -29,11 +44,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@frc-web-components/cli": "^4.3.0-alpha.1",
-    "@frc-web-components/fwc": "^2.4.3",
-    "@frc-web-components/plugins": "^4.3.0-alpha.1",
-    "electron-squirrel-startup": "^1.0.0",
+    "@msgpack/msgpack": "^3.0.0-beta2",
+    "electron-squirrel-startup": "^1.0.1",
+    "isomorphic-ws": "^5.0.0",
     "ntcore-ts-client": "^0.2.2",
-    "wpilib-nt-client": "^1.7.2"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsconfig-paths-webpack-plugin": "^4.1.0",
+    "zod": "^3.23.8"
   }
 }
