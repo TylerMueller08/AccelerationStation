@@ -76,13 +76,13 @@ p {
   grid-area: main;
 
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.15fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 475px 1fr 1fr 308px;
+  grid-template-rows: 170px 170px 170px;
   grid-template-areas: 
     "c1 c3 c5 c7"
     "c2 c3 c6 c7"
     "c2 c4 c6 c7";
-  gap: 20px;
+  gap: 18px;
 }
 
 .card { 
@@ -97,6 +97,10 @@ p {
 
 .false {
   background-color: red;
+}
+
+.unknown {
+  background-color: #9b870c;
 }
 
 .header > .navigationBar {
@@ -201,7 +205,6 @@ p {
 .card:nth-child(1) > p {
   text-align: left;
   padding-left: 30px;
-  font-size: 12pt;
   padding-bottom: 10px;
 }
 
@@ -212,7 +215,7 @@ p {
 #camera {
   margin-inline: auto;
   width: 90%;
-  height: 80%;
+  height: 75%;
   background: url("images/icon-camera.png");
   background-size: 100px, 100px;
 
@@ -238,8 +241,8 @@ p {
 .status-grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  row-gap: 15px;
 }
 
 .fault-name {
@@ -287,7 +290,8 @@ p {
 .switch-grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 10px;
 }
 
 .switch-name {
@@ -361,11 +365,15 @@ input:checked + .slider:before {
   grid-area: c6;
 }
 
+.card:nth-child(6) > h1 {
+  padding-bottom: 0px;
+}
+
 .states-grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  row-gap: 0px;
+  row-gap: 5px;
 }
 
 .state-name {

@@ -22,8 +22,8 @@ if (require('electron-squirrel-startup')) {
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 703,
+    width: 1590,
+    height: 642,
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -36,6 +36,7 @@ const createWindow = (): void => {
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.setResizable(false);
+  mainWindow.setPosition(5, 5);
 
   // Close Application
   ipcMain.on('closeApp', () => {
