@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { NetworkTables, NetworkTablesTypeInfos } from "ntcore-ts-client";
+import { NetworkTablesTypeInfos } from "ntcore-ts-client";
+import { ntcore } from "../../ntcoreInstance";
 
 const TopLimitSwitchComponent: React.FC = () => {
     const [topLimitSwitch, setTopLimitSwitch] = useState(null);
 
     useEffect(() => {
-        const ntcore = NetworkTables.getInstanceByTeam(4593);
-        const topLimitSwitchTopic = ntcore.createTopic<boolean>("/accelerationstation/topLimitSwitchBool", NetworkTablesTypeInfos.kBoolean);
+        const topLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/TopLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
 
-        const interval = setInterval(() => {
-            topLimitSwitchTopic.subscribe((value) => {
-                setTopLimitSwitch(value);
-            }, true);
-        }, 1000);
-        
-        return () => clearInterval(interval);
+        topLimitSwitchTopic.subscribe((value) => {
+            setTopLimitSwitch(value);
+        }, true);
     }, []);
 
     return (

@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { NetworkTables, NetworkTablesTypeInfos } from "ntcore-ts-client";
+import { NetworkTablesTypeInfos } from "ntcore-ts-client";
+import { ntcore } from "../../ntcoreInstance";
 
 const ArmStateComponent: React.FC = () => {
-    const [armState, setArmState] = useState("N/A");
+    const [armState, setArmState] = useState(null);
 
     useEffect(() => {
-        const ntcore = NetworkTables.getInstanceByTeam(4593);
-        const armStateTopic = ntcore.createTopic<string>("/accelerationstation/armState", NetworkTablesTypeInfos.kString);
+        const armStateTopic = ntcore.createTopic<string>("/SmartDashboard/ArmState", NetworkTablesTypeInfos.kString);
 
-        const interval = setInterval(() => {
-            armStateTopic.subscribe((value) => {
-                setArmState(value);
-            }, true);
-        }, 1000);
-
-        return () => clearInterval(interval);
+        armStateTopic.subscribe((value) => {
+            setArmState(value);
+        }, true);
     }, []);
 
     return (

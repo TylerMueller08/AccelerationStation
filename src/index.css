@@ -218,8 +218,6 @@ p {
   height: 75%;
   background: url("images/icon-camera.png");
   background-size: 100px, 100px;
-
-  /* background: url('http://79.120.134.229:8080/cam_1.cgi'); */
   background-repeat: no-repeat;
   background-position: center;
   border: 5px solid white;
@@ -265,6 +263,10 @@ p {
 
 .card:nth-child(4) {
   grid-area: c4;
+}
+
+.card:nth-child(4) > h1 {
+  padding-bottom: 0px;
 }
 
 #auto-selector {

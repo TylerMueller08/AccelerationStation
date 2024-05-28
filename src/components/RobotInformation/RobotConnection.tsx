@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { NetworkTables } from "ntcore-ts-client";
+import { ntcore } from "../../ntcoreInstance";
 
 const RobotConnectionComponent: React.FC = () => {
-    const [robotConnected, setRobotConnected] = useState(NetworkTables.getInstanceByTeam(4593).isRobotConnected());
+    const [robotConnected, setRobotConnected] = useState(ntcore.isRobotConnected());
 
     useEffect(() => {
-        const ntcore = NetworkTables.getInstanceByTeam(4593);
-
         const interval = setInterval(() => {
             setRobotConnected(ntcore.isRobotConnected());
-        }, 1000);
+        }, 100);
 
         return () => clearInterval(interval);
     }, []);

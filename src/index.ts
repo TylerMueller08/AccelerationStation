@@ -4,16 +4,6 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 const path = require("path");
 
-import { NetworkTables } from "ntcore-ts-client";
-
-// Connect to Network Table using Team Number
-const ntcore = NetworkTables.getInstanceByTeam(4593); // Team #, Port #
-
-// Create the autoMode topic w/ a default return value of "No Auto"
-
-console.log("Robot Connecting: " + ntcore.isRobotConnecting());
-console.log("Robot Connected: " + ntcore.isRobotConnected());
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -37,6 +27,17 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   mainWindow.setResizable(false);
   mainWindow.setPosition(5, 5);
+  // mainWindow.loadURL('http://localhost:3000');
+
+  mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ["connect-src 'self' ws://127.0.0.1:5810 ws://roborio-4593-frc.local:5810"],
+      },
+    });
+  });
+
 
   // Close Application
   ipcMain.on('closeApp', () => {

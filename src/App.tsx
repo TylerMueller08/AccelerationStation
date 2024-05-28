@@ -4,7 +4,7 @@ import MinimizeButtonComponent from "./components/MinimizeButton";
 import MaximizeButtonComponent from "./components/MaximizeButton";
 import ToggleMenuComponent from "./components/ToggleMenuComponent";
 import RobotConnectionComponent from "./components/RobotInformation/RobotConnection";
-import RobotConnectingComponent from "./components/RobotInformation/RobotConnecting";
+import RobotConnectingComponent from "./components/Faults/RobotConnecting";
 import ArmStateComponent from "./components/RobotStates/ArmState";
 import RobotTimerComponent from "./components/RobotInformation/RobotTimer";
 import PrimaryEncoderComponent from "./components/RobotStates/PrimaryEncoder";
@@ -12,6 +12,12 @@ import SecondaryEncoderComponent from "./components/RobotStates/SecondaryEncoder
 import BottomLimitSwitchComponent from "./components/RobotStates/BottomLimitSwitch";
 import TopLimitSwitchComponent from "./components/RobotStates/TopLimitSwitch";
 import IntakeLimitSwitchComponent from "./components/RobotStates/IntakeLimitSwitch";
+import AutoSelectorComponent from "./components/AutoSelector/AutoSelector";
+import DriverControllerConnectedComponent from "./components/Faults/DriverControllerConnected";
+import AuxControllerConnectedComponent from "./components/Faults/AuxControllerConnected";
+import CANBusUtilizationComponent from "./components/RobotInformation/CANBusUtilization";
+import EncoderFailureDetectedComponent from "./components/Faults/EncoderFailureDetected";
+import ManualControlEnabledComponent from "./components/Faults/ManualControlEnabled";
 
 const App: React.FC = () => {
     return (
@@ -39,7 +45,7 @@ const App: React.FC = () => {
                     <h1>Robot Information</h1>
                     <RobotConnectionComponent/>
                     <RobotTimerComponent/>
-                    <p id="can-utilization">CAN Utilization: 0%</p>
+                    <CANBusUtilizationComponent/>
                     </div>
                 <div className="card">
                     <h1>Camera</h1>
@@ -51,31 +57,29 @@ const App: React.FC = () => {
                         <p className="fault-name">Radio Connecting: </p>
                         <RobotConnectingComponent/>
                         <p className="fault-name">Driver Controller: </p>
-                        <div className="fault-status"></div>
+                        <DriverControllerConnectedComponent/>
                         <p className="fault-name">Aux Controller: </p>
-                        <div className="fault-status"></div>
-                        <p className="fault-name">Primary Encoder: </p>
-                        <div className="fault-status"></div>
-                        <p className="fault-name">Backup Encoder: </p>
-                        <div className="fault-status"></div>
+                        <AuxControllerConnectedComponent/>
+                        <p className="fault-name">Encoder Failure: </p>
+                        <EncoderFailureDetectedComponent/>
+                        <p className="fault-name">Manual Control: </p>
+                        <ManualControlEnabledComponent/>
                     </div>
                 </div>
                 <div className="card">
                     <h1>Auto Selector</h1>
                     <p>Select an Autonomous</p>
-                    <select id="auto-selector">
-                        <option>No Autonomous Found</option>
-                    </select>
+                    <AutoSelectorComponent/>
                 </div>
                 <div className="card">
                     <h1>Ready for Match</h1>
                     <div className="switch-grid">
-                        <p className="switch-name">Functions</p>
+                        <p className="switch-name">Functions Checked</p>
                         <label className="switch">
                             <input type="checkbox"></input>
                             <span className="slider round"></span>
                         </label>
-                        <p className="switch-name">Battery</p>
+                        <p className="switch-name">Battery Replaced</p>
                         <label className="switch">
                             <input type="checkbox"></input>
                             <span className="slider round"></span>
