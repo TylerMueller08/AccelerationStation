@@ -3,16 +3,27 @@ import { NetworkTablesTypeInfos } from "ntcore-ts-client";
 import { ntcore } from "../../ntcoreInstance";
 
 const AutoSelectorComponent: React.FC = () => {
-    const [ autoSelected, setAutoSelected ] = useState<string>();
+    const [ autoSelected, setAutoSelected ] = useState<string>(null);
 
     useEffect(() => {
         const autoSelectedTopic = ntcore.createTopic<string>("/SmartDashboard/AutoSelector", NetworkTablesTypeInfos.kString);
-
         autoSelectedTopic.publish();
+
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setAutoSelected(null);
+            }
+        }
 
         autoSelectedTopic.subscribe((value) => {
             setAutoSelected(value);
-        })
+        }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     const handleSelectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -37,7 +48,7 @@ const AutoSelectorComponent: React.FC = () => {
                 <option value="ScoreNoMove">Score, No Move</option>
                 <option value="DoNothing">Do Nothing</option>
             </select>
-            <p>Current Auto: {autoSelected}</p>
+            <p>Deployed Auto: {autoSelected === null ? "N/A" : autoSelected}</p>
         </div>
     );
 };

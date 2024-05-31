@@ -3,22 +3,30 @@ import { NetworkTablesTypeInfos } from "ntcore-ts-client";
 import { ntcore } from "../../ntcoreInstance";
 
 const SecondaryEncoderComponent: React.FC = () => {
-    const [secondaryEncoder, setSecondaryEncoder] = useState<string>("N/A");
+    const [secondaryEncoder, setSecondaryEncoder] = useState<string>(null);
 
     useEffect(() => {
         const secondaryEncoderTopic = ntcore.createTopic<number>("/SmartDashboard/SecondaryEncoderValue", NetworkTablesTypeInfos.kDouble);
 
-        secondaryEncoderTopic.subscribe((value) => {
-            if (value === null) {
-                setSecondaryEncoder("N/A");
-            } else {
-                setSecondaryEncoder(`${value}`);
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setSecondaryEncoder(null);
             }
+        }
+
+        secondaryEncoderTopic.subscribe((value) => {
+            setSecondaryEncoder(`${value}`);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (
-        <p className="state-text">{secondaryEncoder}</p>
+        <p className="state-text">{secondaryEncoder === null ? "N/A" : secondaryEncoder}</p>
     );
 };
 

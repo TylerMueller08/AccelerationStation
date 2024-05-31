@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
-import '../../index.css';
+import { ntcore, photonvisionStream } from "../../ntcoreInstance";
 
 const CameraDisplayComponent: React.FC = () => {
-    const [cameraUrl, setCameraUrl] = useState<string | null>(null);
+    const [cameraUrl, setCameraUrl] = useState<string>(null);
 
     useEffect(() => {
-        // Simulate checking for a camera feed from PhotonVision
-        const checkForCamera = async () => {
-            // Assuming there's a function or API call to check for the camera feed
-            // Replace the URL with the actual API endpoint or method to get the camera feed URL
-            const cameraFeedUrl = 'http://79.120.134.229:8080/cam_1.cgi'; // Example camera URL
-
-            // Mock condition for when the camera is detected
-            if (cameraFeedUrl) {
-                setCameraUrl(cameraFeedUrl);
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setCameraUrl(null);
+            } else {
+                setCameraUrl(photonvisionStream);
             }
         };
 
-        checkForCamera();
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (
-        <>
-            <h1>Camera</h1>
-            <div 
-                id="camera" 
-                style={{
-                    backgroundImage: cameraUrl ? `url('${cameraUrl}')` : `url('images/icon-camera.png')`,
-                    backgroundSize: cameraUrl ? 'cover' : '100px 100px'
-                }}
-            ></div>
-        </>
+        <div id="camera"
+            style={{
+                backgroundImage: cameraUrl === null ? `url('https://i.imgur.com/cVotd4I.png')` : `url('${cameraUrl}')`,
+                backgroundSize: cameraUrl === null ? '100px 100px' : '100% 100%',
+                backgroundRepeat: 'no-repeat',
+            }}
+        ></div>
     );
 };
 

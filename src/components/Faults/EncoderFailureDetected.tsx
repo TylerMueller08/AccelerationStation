@@ -8,9 +8,21 @@ const EncoderFailureDetectedComponent: React.FC = () => {
     useEffect(() => {
         const encoderFailureDetectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/EncoderFailureDetected", NetworkTablesTypeInfos.kBoolean);
 
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setEncoderFailureDetected(null);
+            }
+        };
+
         encoderFailureDetectedTopic.subscribe((value) => {
             setEncoderFailureDetected(value);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (

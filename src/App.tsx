@@ -18,6 +18,9 @@ import AuxControllerConnectedComponent from "./components/Faults/AuxControllerCo
 import CANBusUtilizationComponent from "./components/RobotInformation/CANBusUtilization";
 import EncoderFailureDetectedComponent from "./components/Faults/EncoderFailureDetected";
 import ManualControlEnabledComponent from "./components/Faults/ManualControlEnabled";
+import FieldOrientationComponent from "./components/Field/FieldOrientation";
+import CameraDisplayComponent from "./components/Camera/CameraDisplay";
+import ConnectionSettingsComponent from "./components/Connection";
 
 const App: React.FC = () => {
     return (
@@ -39,6 +42,8 @@ const App: React.FC = () => {
             </div>
             <div className="sidebar">
                 <h1 id="sidebarText">Dashboard</h1>
+                <ConnectionSettingsComponent/>
+                <p id="sidebarFooter">Created by<br/>4593 Rapid Acceleration</p>
             </div>
             <div className="main">
                 <div className="card">
@@ -49,7 +54,7 @@ const App: React.FC = () => {
                     </div>
                 <div className="card">
                     <h1>Camera</h1>
-                    <div id="camera"></div>
+                    <CameraDisplayComponent/>
                 </div>
                 <div className="card">
                     <h1>Faults Detected</h1>
@@ -103,7 +108,7 @@ const App: React.FC = () => {
                         <IntakeLimitSwitchComponent/>
                     </div>
                 </div>
-                <div className="card"></div>
+                <FieldOrientationComponent/>
             </div>
         </div>
     )

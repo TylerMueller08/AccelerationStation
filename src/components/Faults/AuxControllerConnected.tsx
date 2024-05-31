@@ -8,9 +8,21 @@ const AuxControllerConnectedComponent: React.FC = () => {
     useEffect(() => {
         const auxControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/AuxControllerConnected", NetworkTablesTypeInfos.kBoolean);
 
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setAuxControllerConnected(null);
+            }
+        };
+
         auxControllerConnectedTopic.subscribe((value) => {
             setAuxControllerConnected(value);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (

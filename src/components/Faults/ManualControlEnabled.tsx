@@ -8,9 +8,21 @@ const ManualControlEnabledComponent: React.FC = () => {
     useEffect(() => {
         const manualControlEnabledTopic = ntcore.createTopic<boolean>("/SmartDashboard/ManualControlEnabled", NetworkTablesTypeInfos.kBoolean);
 
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setManualControlEnabled(null);
+            }
+        };
+
         manualControlEnabledTopic.subscribe((value) => {
             setManualControlEnabled(value);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (

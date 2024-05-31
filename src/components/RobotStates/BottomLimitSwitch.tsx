@@ -8,9 +8,21 @@ const BottomLimitSwitchComponent: React.FC = () => {
     useEffect(() => {
         const bottomLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/BottomLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
 
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setBottomLimitSwitch(null);
+            }
+        };
+
         bottomLimitSwitchTopic.subscribe((value) => {
             setBottomLimitSwitch(value);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (

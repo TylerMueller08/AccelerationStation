@@ -1,6 +1,6 @@
 // https://github.com/cjlawson02/ntcore-ts-client
 
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, screen } from 'electron';
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 const path = require("path");
 
@@ -10,11 +10,14 @@ if (require('electron-squirrel-startup')) {
 }
 
 const createWindow = (): void => {
+  let factor = screen.getPrimaryDisplay().scaleFactor;
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1590,
-    height: 642,
+    width: 1590 / factor,
+    height: 642 / factor,
     frame: false,
+    resizable: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -25,9 +28,7 @@ const createWindow = (): void => {
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
-  mainWindow.setResizable(false);
   mainWindow.setPosition(5, 5);
-  // mainWindow.loadURL('http://localhost:3000');
 
   mainWindow.webContents.session.webRequest.onHeadersReceived((details, callback) => {
     callback({

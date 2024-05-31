@@ -8,9 +8,21 @@ const DriverControllerConnectedComponent: React.FC = () => {
     useEffect(() => {
         const driverControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/DriverControllerConnected", NetworkTablesTypeInfos.kBoolean);
 
+        const checkConnectionStatus = () => {
+            if (!ntcore.isRobotConnected()) {
+                setDriverControllerConnected(null);
+            }
+        };
+
         driverControllerConnectedTopic.subscribe((value) => {
             setDriverControllerConnected(value);
         }, true);
+
+        const interval = setInterval(checkConnectionStatus, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (
