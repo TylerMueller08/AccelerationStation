@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ntcore } from "../../ntcoreInstance";
 
 const RobotConnectionComponent: React.FC = () => {
+
     const [robotConnected, setRobotConnected] = useState(ntcore.isRobotConnected());
 
     useEffect(() => {

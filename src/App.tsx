@@ -41,9 +41,7 @@ const App: React.FC = () => {
                 </div>
             </div>
             <div className="sidebar">
-                <h1 id="sidebarText">Dashboard</h1>
                 <ConnectionSettingsComponent/>
-                <p id="sidebarFooter">Created by<br/>4593 Rapid Acceleration</p>
             </div>
             <div className="main">
                 <div className="card">

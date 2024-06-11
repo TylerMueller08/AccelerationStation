@@ -1,12 +1,10 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { NetworkTables } from "ntcore-ts-client";
+import { ntcore } from "../ntcoreInstance";
 
-// Function to save to localStorage
 const saveToLocalStorage = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
 };
 
-// Function to get from localStorage
 const getFromLocalStorage = (key: string, defaultValue: any) => {
     const saved = localStorage.getItem(key);
     if (saved !== null) {
@@ -15,24 +13,20 @@ const getFromLocalStorage = (key: string, defaultValue: any) => {
     return defaultValue;
 };
 
-// Component
 const ConnectionSettingsComponent: React.FC = () => {
     const [connectionType, setConnectionType] = useState<string>(getFromLocalStorage('connectionType', 'teamNumber'));
     const [teamNumber, setTeamNumber] = useState<string>(getFromLocalStorage('teamNumber', '4593'));
     const [ipAddress, setIpAddress] = useState<string>(getFromLocalStorage('ipAddress', '127.0.0.1'));
-    const [ntcore, setNtcore] = useState<any>(null);
 
     useEffect(() => {
-        // Save settings to localStorage
         saveToLocalStorage('connectionType', connectionType);
         saveToLocalStorage('teamNumber', teamNumber);
         saveToLocalStorage('ipAddress', ipAddress);
 
-        // Update ntcore instance based on the connection type
         if (connectionType === 'teamNumber') {
-            // setNtcore(NetworkTables.getInstanceByTeam(Number(teamNumber)));
+            // setNtcoreByTeamNumber(Number(teamNumber));
         } else if (connectionType === 'development') {
-            // setNtcore(NetworkTables.getInstanceByURI(ipAddress));
+            // setNtcoreByURI(ipAddress);
         }
     }, [connectionType, teamNumber, ipAddress]);
 
@@ -46,22 +40,26 @@ const ConnectionSettingsComponent: React.FC = () => {
 
     const handleIpAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
         setIpAddress(event.target.value);
+        if (connectionType === 'development') {
+            // setNtcoreByURI(event.target.value); // Update ntcore instance when IP address changes
+        }
     };
 
     return (
         <div>
-            <h1 id="sidebarSubText">Connection Settings</h1>
+            <h1 id="sidebarTitleText">Dashboard</h1>
+            <h1 id="sidebarSubtext">Connection Settings</h1>
             <div>
                 <button id="connectionButton" className="team" onClick={() => handleConnectionTypeChange('teamNumber')}>Team Number</button>
                 <button id="connectionButton" className="dev" onClick={() => handleConnectionTypeChange('development')}>Development</button>
             </div>
             <div>
                 {connectionType === 'teamNumber' && (
-                    <div>
-                        <label id="connectionLabel">
+                    <div id="connectionLabel">
+                        <label>
                             Team Number:
                             <input
-                                id = "connectionInput"
+                                id="connectionInput"
                                 type="text"
                                 value={teamNumber}
                                 onChange={handleTeamNumberChange}
@@ -70,11 +68,11 @@ const ConnectionSettingsComponent: React.FC = () => {
                     </div>
                 )}
                 {connectionType === 'development' && (
-                    <div>
-                        <label id="connectionLabel">
+                    <div id="connectionLabel">
+                        <label>
                             IP Address:
                             <input
-                                id = "connectionInput"
+                                id="connectionInput"
                                 type="text"
                                 value={ipAddress}
                                 onChange={handleIpAddressChange}
@@ -83,6 +81,8 @@ const ConnectionSettingsComponent: React.FC = () => {
                     </div>
                 )}
             </div>
+
+            <p id="sidebarFooter">Created by<br />4593 Rapid Acceleration</p>
         </div>
     );
 };

@@ -10,6 +10,7 @@ const AutoSelectorComponent: React.FC = () => {
         autoSelectedTopic.publish();
 
         const checkConnectionStatus = () => {
+            
             if (!ntcore.isRobotConnected()) {
                 setAutoSelected(null);
             }
