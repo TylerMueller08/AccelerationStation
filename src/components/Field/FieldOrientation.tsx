@@ -31,7 +31,7 @@ const FieldOrientationComponent: React.FC = () => {
                 setIsConnected(false);
             }
         };
-        
+
         allianceColorTopic.subscribe((value) => {
             setFieldOrientation(value);
         }, true);
@@ -70,7 +70,10 @@ const FieldOrientationComponent: React.FC = () => {
         >
             <div id="robotframe" 
                 style={{
-                    transform: `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 481}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
+                    transform: !fieldOrientation
+                    ? `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 31}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
+                    : `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 481}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
+
                 }}
             ></div>
         </div>
