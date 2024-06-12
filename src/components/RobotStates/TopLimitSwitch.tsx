@@ -6,19 +6,27 @@ const TopLimitSwitchComponent: React.FC = () => {
     const [topLimitSwitch, setTopLimitSwitch] = useState(null);
 
     useEffect(() => {
-        const topLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/TopLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setTopLimitSwitch(null);
             }
         };
 
-        topLimitSwitchTopic.subscribe((value) => {
-            setTopLimitSwitch(value);
-        }, true);
+        const updateConnection = () => {
+            const topLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/TopLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
+            topLimitSwitchTopic.subscribe((value) => {
+                setTopLimitSwitch(value);
+            }, true);
+            
+            setTimeout(() => {
+                topLimitSwitchTopic.unsubscribeAll();
+            }, 500);
+        }
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

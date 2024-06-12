@@ -6,19 +6,27 @@ const PrimaryEncoderComponent: React.FC = () => {
     const [primaryEncoder, setPrimaryEncoder] = useState<string>(null);
 
     useEffect(() => {
-        const primaryEncoderTopic = ntcore.createTopic<number>("/SmartDashboard/PrimaryEncoderValue", NetworkTablesTypeInfos.kDouble);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setPrimaryEncoder(null);
             }
         };
 
-        primaryEncoderTopic.subscribe((value) => {
-            setPrimaryEncoder(`${value}`);
-        }, true);
+        const updateConnection = () => {
+            const primaryEncoderTopic = ntcore.createTopic<number>("/SmartDashboard/PrimaryEncoderValue", NetworkTablesTypeInfos.kDouble);
+            primaryEncoderTopic.subscribe((value) => {
+                setPrimaryEncoder(`${value}`);
+            }, true);
+            
+            setTimeout(() => {
+                primaryEncoderTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);
@@ -26,7 +34,7 @@ const PrimaryEncoderComponent: React.FC = () => {
     }, []);
 
     return (
-        <p className="state-text">{primaryEncoder === null ? "N/A" : primaryEncoder}</p>
+        <p className="state-text">{primaryEncoder == "null" ? "N/A" : primaryEncoder}</p>
     );
 };
 

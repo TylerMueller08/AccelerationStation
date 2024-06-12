@@ -6,19 +6,27 @@ const BottomLimitSwitchComponent: React.FC = () => {
     const [bottomLimitSwitch, setBottomLimitSwitch] = useState(null);
 
     useEffect(() => {
-        const bottomLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/BottomLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setBottomLimitSwitch(null);
             }
         };
 
-        bottomLimitSwitchTopic.subscribe((value) => {
-            setBottomLimitSwitch(value);
-        }, true);
+        const updateConnection = () => {
+            const bottomLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/BottomLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
+            bottomLimitSwitchTopic.subscribe((value) => {
+                setBottomLimitSwitch(value);
+            }, true);
+            
+            setTimeout(() => {
+                bottomLimitSwitchTopic.unsubscribeAll();
+            }, 500);
+        }
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

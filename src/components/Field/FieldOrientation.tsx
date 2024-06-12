@@ -10,11 +10,6 @@ const FieldOrientationComponent: React.FC = () => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
 
     useEffect(() => {
-        const allianceColorTopic = ntcore.createTopic<boolean>("/FMSInfo/IsRedAlliance", NetworkTablesTypeInfos.kBoolean);
-        const fieldXPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldXPosition", NetworkTablesTypeInfos.kDouble);
-        const fieldYPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldYPosition", NetworkTablesTypeInfos.kDouble);
-        const fieldRotationTopic = ntcore.createTopic<number>("/SmartDashboard/FieldRotation", NetworkTablesTypeInfos.kDouble);
-
         const checkConnectionStatus = () => {
             const connected = ntcore.isRobotConnected();
             if (connected) {
@@ -32,33 +27,43 @@ const FieldOrientationComponent: React.FC = () => {
             }
         };
 
-        allianceColorTopic.subscribe((value) => {
-            setFieldOrientation(value);
-        }, true);
+        const updateConnection = () => {
+            const allianceColorTopic = ntcore.createTopic<boolean>("/FMSInfo/IsRedAlliance", NetworkTablesTypeInfos.kBoolean);
+            const fieldXPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldXPosition", NetworkTablesTypeInfos.kDouble);
+            const fieldYPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldYPosition", NetworkTablesTypeInfos.kDouble);
+            const fieldRotationTopic = ntcore.createTopic<number>("/SmartDashboard/FieldRotation", NetworkTablesTypeInfos.kDouble);
+        
+            allianceColorTopic.subscribe((value) => {
+                setFieldOrientation(value);
+            }, true);
+    
+            fieldXPositionTopic.subscribe((value) => {
+                setXPosition(value * 32.9 - 15.7692307692);
+            }, true);
+    
+            fieldYPositionTopic.subscribe((value) => {
+                setYPosition(value * 36.15 - 13.1923076923);
+            }, true);
+    
+            fieldRotationTopic.subscribe((value) => {
+                setRotation(value);
+            }, true);
 
-        fieldXPositionTopic.subscribe((value) => {
-            setXPosition(value * 32.9 - 15.7692307692);
-        }, true);
-
-        fieldYPositionTopic.subscribe((value) => {
-            setYPosition(value * 36.15 - 13.1923076923);
-        }, true);
-
-        fieldRotationTopic.subscribe((value) => {
-            setRotation(value);
-        }, true);
-
+            setTimeout(() => {
+                allianceColorTopic.unsubscribeAll();
+                fieldXPositionTopic.unsubscribeAll();
+                fieldYPositionTopic.unsubscribeAll();
+                fieldRotationTopic.unsubscribeAll();
+            }, 199);
+        };
 
         const interval = setInterval(() => {
             checkConnectionStatus();
-        }, 1000);
+            updateConnection();
+        }, 200);
 
         return() => {
             clearInterval(interval);
-            allianceColorTopic.unsubscribeAll();
-            fieldXPositionTopic.unsubscribeAll();
-            fieldYPositionTopic.unsubscribeAll();
-            fieldRotationTopic.unsubscribeAll();
         }
     })
 
@@ -73,7 +78,6 @@ const FieldOrientationComponent: React.FC = () => {
                     transform: !fieldOrientation
                     ? `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 31}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
                     : `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 481}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
-
                 }}
             ></div>
         </div>

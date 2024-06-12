@@ -6,19 +6,27 @@ const CANBusUtilizationComponent: React.FC = () => {
     const [CANBusUtilization, setCANBusUtilization] = useState<string>(null);
 
     useEffect(() => {
-        const CANBusUtilizationTopic = ntcore.createTopic<number>("/SmartDashboard/CANBusUtilization", NetworkTablesTypeInfos.kInteger);
-    
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setCANBusUtilization(null);
             }
-        }
+        };
 
-        CANBusUtilizationTopic.subscribe((value) => {
-            setCANBusUtilization(`${value}`);
-        }, true);
+        const updateConnection = () => {
+            const CANBusUtilizationTopic = ntcore.createTopic<number>("/SmartDashboard/CANBusUtilization", NetworkTablesTypeInfos.kInteger);
+            CANBusUtilizationTopic.subscribe((value) => {
+                setCANBusUtilization(`${value}`);
+            }, true);
+            
+            setTimeout(() => {
+                CANBusUtilizationTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);
@@ -26,7 +34,7 @@ const CANBusUtilizationComponent: React.FC = () => {
     }, []);
 
     return (
-        <p id="can-utilization">CAN Utilization: {CANBusUtilization === null ? "N/A" : CANBusUtilization}%</p>
+        <p id="can-utilization">CAN Utilization: {CANBusUtilization == "null" ? "N/A" : CANBusUtilization}%</p>
     )
 };
 

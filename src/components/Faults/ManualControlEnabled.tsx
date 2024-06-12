@@ -6,19 +6,27 @@ const ManualControlEnabledComponent: React.FC = () => {
     const [manualControlEnabled, setManualControlEnabled] = useState(null);
 
     useEffect(() => {
-        const manualControlEnabledTopic = ntcore.createTopic<boolean>("/SmartDashboard/ManualControlEnabled", NetworkTablesTypeInfos.kBoolean);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setManualControlEnabled(null);
             }
         };
 
-        manualControlEnabledTopic.subscribe((value) => {
-            setManualControlEnabled(value);
-        }, true);
+        const updateConnection = () => {
+            const manualControlEnabledTopic = ntcore.createTopic<boolean>("/SmartDashboard/ManualControlEnabled", NetworkTablesTypeInfos.kBoolean);
+            manualControlEnabledTopic.subscribe((value) => {
+                setManualControlEnabled(value);
+            }, true);
+            
+            setTimeout(() => {
+                manualControlEnabledTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

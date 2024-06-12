@@ -6,19 +6,27 @@ const ArmStateComponent: React.FC = () => {
     const [armState, setArmState] = useState(null);
 
     useEffect(() => {
-        const armStateTopic = ntcore.createTopic<string>("/SmartDashboard/ArmState", NetworkTablesTypeInfos.kString);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setArmState(null);
             }
         };
 
-        armStateTopic.subscribe((value) => {
-            setArmState(value);
-        }, true);
+        const updateConnection = () => {
+            const armStateTopic = ntcore.createTopic<string>("/SmartDashboard/ArmState", NetworkTablesTypeInfos.kString);
+            armStateTopic.subscribe((value) => {
+                setArmState(value);
+            }, true);
+            
+            setTimeout(() => {
+                armStateTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

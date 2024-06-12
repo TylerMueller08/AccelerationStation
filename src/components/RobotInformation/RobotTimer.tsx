@@ -6,25 +6,33 @@ const RobotTimerComponent: React.FC = () => {
     const [remainingTime, setRemainingTime] = useState<string>(null);
 
     useEffect(() => {
-        const matchTimeRemainingTopic = ntcore.createTopic<number>("/SmartDashboard/MatchTimeRemaining", NetworkTablesTypeInfos.kInteger);
-    
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setRemainingTime(null);
             }
         };
 
-        matchTimeRemainingTopic.subscribe((value) => {
-            if (value === -1 || value === null) {
-                setRemainingTime("N/A");
-            } else {
-                const minutes = Math.floor(value / 60);
-                const seconds = value % 60;
-                setRemainingTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
-            }
-        }, true);
+        const updateConnection = () => {
+            const matchTimeRemainingTopic = ntcore.createTopic<number>("/SmartDashboard/MatchTimeRemaining", NetworkTablesTypeInfos.kInteger);
+            matchTimeRemainingTopic.subscribe((value) => {
+                if (value === -1 || value === null) {
+                    setRemainingTime("N/A");
+                } else {
+                    const minutes = Math.floor(value / 60);
+                    const seconds = value % 60;
+                    setRemainingTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+                }
+            }, true);
+            
+            setTimeout(() => {
+                matchTimeRemainingTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

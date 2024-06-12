@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import { ntcore } from "../ntcoreInstance";
+import { ntcore, setConnectionByTeamNumber, setConnectionByURI } from "../ntcoreInstance";
 
 const saveToLocalStorage = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
@@ -23,11 +23,11 @@ const ConnectionSettingsComponent: React.FC = () => {
         saveToLocalStorage('teamNumber', teamNumber);
         saveToLocalStorage('ipAddress', ipAddress);
 
-        if (connectionType === 'teamNumber') {
-            // setNtcoreByTeamNumber(Number(teamNumber));
-        } else if (connectionType === 'development') {
-            // setNtcoreByURI(ipAddress);
-        }
+        // if (connectionType === 'teamNumber') {
+        //     setConnectionByTeamNumber(Number(teamNumber));
+        // } else if (connectionType === 'development') {
+        //     setConnectionByURI(ipAddress);
+        // }
     }, [connectionType, teamNumber, ipAddress]);
 
     const handleConnectionTypeChange = (type: string) => {
@@ -40,8 +40,13 @@ const ConnectionSettingsComponent: React.FC = () => {
 
     const handleIpAddressChange = (event: ChangeEvent<HTMLInputElement>) => {
         setIpAddress(event.target.value);
-        if (connectionType === 'development') {
-            // setNtcoreByURI(event.target.value); // Update ntcore instance when IP address changes
+    };
+
+    const handleConnect = () => {
+        if (connectionType === 'teamNumber') {
+            setConnectionByTeamNumber(Number(teamNumber));
+        } else if (connectionType === 'development') {
+            setConnectionByURI(ipAddress);
         }
     };
 
@@ -81,7 +86,7 @@ const ConnectionSettingsComponent: React.FC = () => {
                     </div>
                 )}
             </div>
-
+            <button id="connectButton" onClick={handleConnect}>Connect</button>
             <p id="sidebarFooter">Created by<br />4593 Rapid Acceleration</p>
         </div>
     );

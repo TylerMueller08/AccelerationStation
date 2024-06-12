@@ -6,21 +6,28 @@ const AutoSelectorComponent: React.FC = () => {
     const [ autoSelected, setAutoSelected ] = useState<string>(null);
 
     useEffect(() => {
-        const autoSelectedTopic = ntcore.createTopic<string>("/SmartDashboard/AutoSelector", NetworkTablesTypeInfos.kString);
-        autoSelectedTopic.publish();
-
         const checkConnectionStatus = () => {
-            
             if (!ntcore.isRobotConnected()) {
                 setAutoSelected(null);
             }
-        }
+        };
 
-        autoSelectedTopic.subscribe((value) => {
-            setAutoSelected(value);
-        }, true);
+        const updateConnection = () => {
+            const autoSelectedTopic = ntcore.createTopic<string>("/SmartDashboard/AutoSelector", NetworkTablesTypeInfos.kString);
+            autoSelectedTopic.publish();
+            autoSelectedTopic.subscribe((value) => {
+                setAutoSelected(value);
+            }, true);
+            
+            setTimeout(() => {
+                autoSelectedTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);
@@ -49,7 +56,7 @@ const AutoSelectorComponent: React.FC = () => {
                 <option value="ScoreNoMove">Score, No Move</option>
                 <option value="DoNothing">Do Nothing</option>
             </select>
-            <p>Deployed Auto: {autoSelected === null ? "N/A" : autoSelected}</p>
+            <p>Deployed Auto: {autoSelected == null ? "N/A" : autoSelected}</p>
         </div>
     );
 };

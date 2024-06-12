@@ -6,19 +6,27 @@ const DriverControllerConnectedComponent: React.FC = () => {
     const [driverControllerConnected, setDriverControllerConnected] = useState(null);
 
     useEffect(() => {
-        const driverControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/DriverControllerConnected", NetworkTablesTypeInfos.kBoolean);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setDriverControllerConnected(null);
             }
         };
 
-        driverControllerConnectedTopic.subscribe((value) => {
-            setDriverControllerConnected(value);
-        }, true);
+        const updateConnection = () => {
+            const driverControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/DriverControllerConnected", NetworkTablesTypeInfos.kBoolean);
+            driverControllerConnectedTopic.subscribe((value) => {
+                setDriverControllerConnected(value);
+            }, true);
+            
+            setTimeout(() => {
+                driverControllerConnectedTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);

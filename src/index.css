@@ -84,7 +84,7 @@ p {
   width: 400px;
 }
 
-#connectionButton {
+#connectionButton, #connectButton {
   opacity: 0;
   transform: translateX(-200%);
   transition: opacity 0.8s, transform 0.8s;
@@ -95,7 +95,8 @@ p {
 .sidebar.visible #sidebarTitleText,
 .sidebar.visible #sidebarSubtext,
 .sidebar.visible #connectionLabel,
-.sidebar.visible #connectionButton {
+.sidebar.visible #connectionButton,
+.sidebar.visible #connectButton {
   opacity: 1;
   transform: translateX(0);
 }
@@ -122,7 +123,7 @@ p {
   font-size: 11pt;
   letter-spacing: 2px;
   color: lightgrey;
-  transform: translateY(1000%);
+  transform: translateY(800%);
 }
 
 #connectionLabel {
@@ -156,6 +157,21 @@ p {
   cursor: pointer;
   margin-left: 34px;
   margin-bottom: 25px;
+}
+
+#connectButton {
+  font-family: mokoto;
+  font-size: 11pt;
+  background-color: #313338;
+  color: white;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 120px;
+  height: 35px;
+  margin-top: 25px;
+  margin-left: 143px;
 }
 
 .main {

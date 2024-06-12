@@ -6,19 +6,27 @@ const EncoderFailureDetectedComponent: React.FC = () => {
     const [encoderFailureDetected, setEncoderFailureDetected] = useState(null);
 
     useEffect(() => {
-        const encoderFailureDetectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/EncoderFailureDetected", NetworkTablesTypeInfos.kBoolean);
-
         const checkConnectionStatus = () => {
             if (!ntcore.isRobotConnected()) {
                 setEncoderFailureDetected(null);
             }
         };
 
-        encoderFailureDetectedTopic.subscribe((value) => {
-            setEncoderFailureDetected(value);
-        }, true);
+        const updateConnection = () => {
+            const encoderFailureDetectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/EncoderFailureDetected", NetworkTablesTypeInfos.kBoolean);
+            encoderFailureDetectedTopic.subscribe((value) => {
+                setEncoderFailureDetected(value);
+            }, true);
+            
+            setTimeout(() => {
+                encoderFailureDetectedTopic.unsubscribeAll();
+            }, 500);
+        };
 
-        const interval = setInterval(checkConnectionStatus, 1000);
+        const interval = setInterval(() => {
+            checkConnectionStatus();
+            updateConnection();
+        }, 1000);
 
         return() => {
             clearInterval(interval);
