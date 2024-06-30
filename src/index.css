@@ -53,7 +53,6 @@ p {
   background-color: #1E1F22;
   height: 100vh;
   width: 0;
-  position: absolute;
   transition: 0.8s;
   z-index: 100000;
   border-top-right-radius: 20px;
@@ -62,23 +61,16 @@ p {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px; /* Ensure space at the bottom */
 }
 
 #sidebarTitleText,
 #sidebarSubtext,
-#sidebarFooter,
 #connectionLabel {
   opacity: 0;
   transform: translateX(-100%);
-  transition: opacity 0.8s, transform 0.8s;
-  white-space: nowrap;
-  width: 400px;
-}
-
-#sidebarFooter {
-  opacity: 0;
-  transform: translateX(-100%), translateY(1000%);
   transition: opacity 0.8s, transform 0.8s;
   white-space: nowrap;
   width: 400px;
@@ -101,11 +93,6 @@ p {
   transform: translateX(0);
 }
 
-.sidebar.visible #sidebarFooter {
-  opacity: 1;
-  transform: translateX(0), translateY(1000%);
-}
-
 #sidebarTitleText {
   font-size: 22pt;
   letter-spacing: 5px;
@@ -118,20 +105,12 @@ p {
   text-align: center;
 }
 
-#sidebarFooter {
-  text-align: center;
-  font-size: 11pt;
-  letter-spacing: 2px;
-  color: lightgrey;
-  transform: translateY(800%);
-}
-
 #connectionLabel {
   font-size: 12pt;
   text-align: center;
 }
 
-#connectionInput {
+#connectionInput, #cameraIpInput {
   border: 2px solid white;
   border-radius: 10px;
   width: 100px;
@@ -172,6 +151,10 @@ p {
   height: 35px;
   margin-top: 25px;
   margin-left: 143px;
+}
+
+.cameraIP {
+  margin-top: 60px;
 }
 
 .main {

@@ -6,26 +6,16 @@ const EncoderFailureDetectedComponent: React.FC = () => {
     const [encoderFailureDetected, setEncoderFailureDetected] = useState(null);
 
     useEffect(() => {
-        const checkConnectionStatus = () => {
+        const encoderFailureDetectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/EncoderFailureDetected", NetworkTablesTypeInfos.kBoolean);
+            
+        encoderFailureDetectedTopic.subscribe((value) => {
+            setEncoderFailureDetected(value);
+        }, true);
+
+        const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setEncoderFailureDetected(null);
             }
-        };
-
-        const updateConnection = () => {
-            const encoderFailureDetectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/EncoderFailureDetected", NetworkTablesTypeInfos.kBoolean);
-            encoderFailureDetectedTopic.subscribe((value) => {
-                setEncoderFailureDetected(value);
-            }, true);
-            
-            setTimeout(() => {
-                encoderFailureDetectedTopic.unsubscribeAll();
-            }, 500);
-        };
-
-        const interval = setInterval(() => {
-            checkConnectionStatus();
-            updateConnection();
         }, 1000);
 
         return() => {
@@ -34,7 +24,7 @@ const EncoderFailureDetectedComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${encoderFailureDetected === null ? 'unknown' : encoderFailureDetected ? 'true' : 'false'}`}></div>
+        <div className={`fault-status ${encoderFailureDetected == null ? 'unknown' : encoderFailureDetected ? 'true' : 'false'}`}></div>
     );
 }
 

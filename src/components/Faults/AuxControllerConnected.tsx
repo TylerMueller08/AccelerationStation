@@ -6,26 +6,16 @@ const AuxControllerConnectedComponent: React.FC = () => {
     const [auxControllerConnected, setAuxControllerConnected] = useState(null);
 
     useEffect(() => {
-        const checkConnectionStatus = () => {
+        const auxControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/AuxControllerConnected", NetworkTablesTypeInfos.kBoolean);
+        
+        auxControllerConnectedTopic.subscribe((value) => {
+            setAuxControllerConnected(value);
+        }, true);
+
+        const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setAuxControllerConnected(null);
             }
-        };
-
-        const updateConnection = () => {
-            const auxControllerConnectedTopic = ntcore.createTopic<boolean>("/SmartDashboard/AuxControllerConnected", NetworkTablesTypeInfos.kBoolean);
-            auxControllerConnectedTopic.subscribe((value) => {
-                setAuxControllerConnected(value);
-            }, true);
-            
-            setTimeout(() => {
-                auxControllerConnectedTopic.unsubscribeAll();
-            }, 500);
-        };
-
-        const interval = setInterval(() => {
-            checkConnectionStatus();
-            updateConnection();
         }, 1000);
 
         return() => {
@@ -34,7 +24,7 @@ const AuxControllerConnectedComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${auxControllerConnected === null ? 'unknown' : auxControllerConnected ? 'true' : 'false'}`}></div>
+        <div className={`fault-status ${auxControllerConnected == null ? 'unknown' : auxControllerConnected ? 'true' : 'false'}`}></div>
     );
 }
 

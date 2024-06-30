@@ -8,7 +8,7 @@ const RobotConnectionComponent: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setRobotConnected(ntcore.isRobotConnected());
-        }, 100);
+        }, 1000);
 
         return () => clearInterval(interval);
     }, []);

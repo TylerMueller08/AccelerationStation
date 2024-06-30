@@ -6,26 +6,16 @@ const IntakeLimitSwitchComponent: React.FC = () => {
     const [intakeLimitSwitch, setIntakeLimitSwitch] = useState(null);
 
     useEffect(() => {
-        const checkConnectionStatus = () => {
+        const intakeLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/IntakeLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
+        
+        intakeLimitSwitchTopic.subscribe((value) => {
+            setIntakeLimitSwitch(value);
+        }, true);
+
+        const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setIntakeLimitSwitch(null);
             }
-        };
-
-        const updateConnection = () => {
-            const intakeLimitSwitchTopic = ntcore.createTopic<boolean>("/SmartDashboard/IntakeLimitSwitchValue", NetworkTablesTypeInfos.kBoolean);
-            intakeLimitSwitchTopic.subscribe((value) => {
-                setIntakeLimitSwitch(value);
-            }, true);
-            
-            setTimeout(() => {
-                intakeLimitSwitchTopic.unsubscribeAll();
-            }, 500);
-        };
-
-        const interval = setInterval(() => {
-            checkConnectionStatus();
-            updateConnection();
         }, 1000);
 
         return() => {
@@ -34,7 +24,7 @@ const IntakeLimitSwitchComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${intakeLimitSwitch === null ? 'unknown' : intakeLimitSwitch ? 'true' : 'false'}`}></div>
+        <div className={`fault-status ${intakeLimitSwitch == null ? 'unknown' : intakeLimitSwitch ? 'true' : 'false'}`}></div>
     );
 }
 
