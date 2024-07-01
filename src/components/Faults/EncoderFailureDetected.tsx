@@ -15,6 +15,8 @@ const EncoderFailureDetectedComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setEncoderFailureDetected(null);
+            } else {
+                encoderFailureDetectedTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

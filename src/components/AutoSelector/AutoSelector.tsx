@@ -17,6 +17,8 @@ const AutoSelectorComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setAutoSelected(null);
+            } else {
+                autoSelectedTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

@@ -15,6 +15,8 @@ const IntakeLimitSwitchComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setIntakeLimitSwitch(null);
+            } else {
+                intakeLimitSwitchTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

@@ -21,6 +21,8 @@ const RobotTimerComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setRemainingTime(null);
+            } else {
+                matchTimeRemainingTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

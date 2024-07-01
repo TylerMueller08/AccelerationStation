@@ -15,6 +15,8 @@ const PrimaryEncoderComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setPrimaryEncoder(null);
+            } else {
+                primaryEncoderTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

@@ -14,7 +14,9 @@ const CANBusUtilizationComponent: React.FC = () => {
 
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
-                setCANBusUtilization(null);
+                setCANBusUtilization("null");
+            } else {
+                CANBusUtilizationTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

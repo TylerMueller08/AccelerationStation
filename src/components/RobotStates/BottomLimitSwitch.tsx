@@ -15,6 +15,8 @@ const BottomLimitSwitchComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setBottomLimitSwitch(null);
+            } else {
+                bottomLimitSwitchTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

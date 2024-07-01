@@ -15,6 +15,8 @@ const ArmStateComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setArmState(null);
+            } else {
+                armStateTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

@@ -11,13 +11,21 @@ const CameraDisplayComponent: React.FC = () => {
         cameraIPStreamTopic.subscribe((value) => {
             setCameraUrl(value)
         }, true);
+
+        const interval = setInterval(() => {
+            if (!ntcore.isRobotConnected()) {
+                setCameraUrl(null);
+            } else {
+                cameraIPStreamTopic.resubscribeAll(ntcore.client)
+            }
+        })
     }, []);
 
     return (
         <div id="camera"
             style={{
-                backgroundImage: `url(${cameraUrl})`,
-                backgroundSize: cameraUrl == "https://i.imgur.com/cVotd4I.png" ? '100px 100px' : '100% 100%',
+                backgroundImage: cameraUrl == null ? 'url(https://i.imgur.com/cVotd4I.png)' : `url(${cameraUrl})`,
+                backgroundSize: cameraUrl == null ? '100px 100px' : '100% 100%',
                 backgroundRepeat: 'no-repeat',
             }}
         ></div>

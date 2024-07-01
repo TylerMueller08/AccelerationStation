@@ -15,6 +15,8 @@ const DriverControllerConnectedComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setDriverControllerConnected(null);
+            } else {
+                driverControllerConnectedTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

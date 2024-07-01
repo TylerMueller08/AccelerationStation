@@ -68,7 +68,6 @@ const FieldOrientationComponent: React.FC = () => {
             });
             setRotation((prev) => lerp(prev, targetRotation.current, 0.1));
 
-            // Add a new point to the trail only if the position has changed significantly
             const newTrailPoint = { x: targetXPosition.current, y: targetYPosition.current, timestamp: Date.now() };
             if (trail.length === 0 || trail[trail.length - 1].x !== newTrailPoint.x || trail[trail.length - 1].y !== newTrailPoint.y) {
                 setTrail((trail) => [...trail, newTrailPoint]);
@@ -118,7 +117,7 @@ const FieldOrientationComponent: React.FC = () => {
                             y1={prevPoint.x}
                             x2={point.y}
                             y2={point.x}
-                            stroke="white"
+                            stroke="yellow"
                             strokeWidth="3"
                             strokeOpacity={(5000 - (Date.now() - point.timestamp)) / 5000}
                         />

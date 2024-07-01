@@ -15,6 +15,8 @@ const ManualControlEnabledComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setManualControlEnabled(null);
+            } else {
+                manualControlEnabledTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

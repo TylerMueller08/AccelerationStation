@@ -123,6 +123,11 @@ p {
   font-family: mokoto;
 }
 
+#cameraIpInput {
+  width: 200px;
+  margin-top: 7px;
+}
+
 #connectionButton {
   font-family: mokoto;
   font-size: 11pt;

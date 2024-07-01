@@ -15,6 +15,8 @@ const AuxControllerConnectedComponent: React.FC = () => {
         const interval = setInterval(() => {
             if (!ntcore.isRobotConnected()) {
                 setAuxControllerConnected(null);
+            } else {
+                auxControllerConnectedTopic.resubscribeAll(ntcore.client);
             }
         }, 1000);
 

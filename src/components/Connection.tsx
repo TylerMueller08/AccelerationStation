@@ -18,14 +18,15 @@ const ConnectionSettingsComponent: React.FC = () => {
     const [connectionType, setConnectionType] = useState<string>(getFromLocalStorage('connectionType', 'teamNumber'));
     const [teamNumber, setTeamNumber] = useState<string>(getFromLocalStorage('teamNumber', '4593'));
     const [ipAddress, setIpAddress] = useState<string>(getFromLocalStorage('ipAddress', '127.0.0.1'));
-    const [cameraIp, setCameraIp] = useState<string>('');
+    const [cameraIp, setCameraIp] = useState<string>(getFromLocalStorage('cameraIp', 'https://i.imgur.com/cVotd4I.png'));
 
     useEffect(() => {
         saveToLocalStorage('connectionType', connectionType);
         saveToLocalStorage('teamNumber', teamNumber);
         saveToLocalStorage('ipAddress', ipAddress);
+        saveToLocalStorage('cameraIp', cameraIp)
 
-    }, [connectionType, teamNumber, ipAddress]);
+    }, [connectionType, teamNumber, ipAddress, cameraIp]);
 
     const handleConnectionTypeChange = (type: string) => {
         setConnectionType(type);
@@ -47,25 +48,20 @@ const ConnectionSettingsComponent: React.FC = () => {
         }
     };
 
-    const handleCameraIpChange = () => {
-        const cameraIpInput = document.getElementById('cameraIpInput') as HTMLInputElement;
-        setCameraIp(cameraIpInput.value)
-    };
-
     const cameraIPStreamTopic = ntcore.createTopic<string>("/SmartDashboard/CameraIPStream", NetworkTablesTypeInfos.kString);
     cameraIPStreamTopic.publish();
 
+    const handleCameraIpChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (connectionType == 'teamNumber') {
+            cameraIPStreamTopic.setValue(event.target.value);
+        }
+    };
+
     useEffect(() => {
         const interval = setInterval(() => {
-            if (!ntcore.isRobotConnected()) {
-                cameraIPStreamTopic.setValue('https://i.imgur.com/cVotd4I.png');
-            } else if (connectionType == 'development') {
-                cameraIPStreamTopic.setValue('https://i.imgur.com/hEAVye5.png')
-            } else if (connectionType == 'teamNumber') {
-                if (cameraIp == '') {
-                    cameraIPStreamTopic.setValue('https://i.imgur.com/cVotd4I.png');
-                } else {
-                    cameraIPStreamTopic.setValue(cameraIp);
+            if (ntcore.isRobotConnected()) {
+                if (connectionType == 'development') {
+                    cameraIPStreamTopic.setValue('https://i.imgur.com/hEAVye5.png');
                 }
             }
         }, 1000);
@@ -116,16 +112,14 @@ const ConnectionSettingsComponent: React.FC = () => {
             {connectionType === 'teamNumber' && (
                 <div id="connectionLabel" className="cameraIP">
                     <label>
-                        Camera IP:
+                        Camera IP:<br/>
                         <input
                             id="cameraIpInput"
                             type="text"
+                            onChange={handleCameraIpChange}
                         />
                     </label>
                 </div>
-            )}
-            {connectionType === 'teamNumber' && (
-                <button id="connectButton" onClick={handleCameraIpChange}>Stream</button>
             )}
         </div>
     );
