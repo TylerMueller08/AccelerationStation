@@ -4,12 +4,19 @@ import { ntcore } from "../../ntcoreInstance";
 
 const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end;
 
+interface Point {
+    x: number;
+    y: number;
+    timestamp: number;
+}
+
 const FieldOrientationComponent: React.FC = () => {
     const [fieldOrientation, setFieldOrientation] = useState<boolean | null>(null);
     const [xPosition, setXPosition] = useState(0);
     const [yPosition, setYPosition] = useState(0);
     const [rotation, setRotation] = useState(0);
     const [isConnected, setIsConnected] = useState<boolean>(false);
+    const [trail, setTrail] = useState<Point[]>([]);
 
     const targetXPosition = useRef(0);
     const targetYPosition = useRef(0);
@@ -30,6 +37,9 @@ const FieldOrientationComponent: React.FC = () => {
             const connected = ntcore.isRobotConnected();
             if (connected) {
                 setIsConnected(true);
+                if (Math.abs(fieldXPositionTopic.getValue()) < 0.01 && Math.abs(fieldYPositionTopic.getValue()) < 0.01) {
+                    setIsConnected(false);
+                }
             } else {
                 setFieldOrientation(null);
                 setXPosition(0);
@@ -48,9 +58,21 @@ const FieldOrientationComponent: React.FC = () => {
         let animationFrameId: number;
         
         const updatePosition = () => {
-            setXPosition((prev) => lerp(prev, targetXPosition.current, 0.1)); 
-            setYPosition((prev) => lerp(prev, targetYPosition.current, 0.1));
+            setXPosition((prev) => {
+                const newX = lerp(prev, targetXPosition.current, 0.1);
+                return newX;
+            });
+            setYPosition((prev) => {
+                const newY = lerp(prev, targetYPosition.current, 0.1);
+                return newY;
+            });
             setRotation((prev) => lerp(prev, targetRotation.current, 0.1));
+
+            // Add a new point to the trail only if the position has changed significantly
+            const newTrailPoint = { x: targetXPosition.current, y: targetYPosition.current, timestamp: Date.now() };
+            if (trail.length === 0 || trail[trail.length - 1].x !== newTrailPoint.x || trail[trail.length - 1].y !== newTrailPoint.y) {
+                setTrail((trail) => [...trail, newTrailPoint]);
+            }
             
             animationFrameId = requestAnimationFrame(updatePosition);
         };
@@ -59,6 +81,16 @@ const FieldOrientationComponent: React.FC = () => {
 
         return () => {
             cancelAnimationFrame(animationFrameId);
+        };
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTrail((trail) => trail.filter(point => Date.now() - point.timestamp < 5000));
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
         };
     }, []);
 
@@ -71,10 +103,28 @@ const FieldOrientationComponent: React.FC = () => {
             <div id="robotframe" 
                 style={{
                     transform: !fieldOrientation
-                    ? `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 481}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
-                    : `translate(${isConnected ? yPosition : 188}px, ${isConnected ? xPosition : 31}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
+                    ? `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 215}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
+                    : `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 300}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
                 }}
             ></div>
+            <svg width="100%" height="100%" style={{ position: 'absolute', top: 15.7692307692, left: 13.1923076923 }}>
+                {trail.map((point, index) => {
+                    if (index === 0) return null;
+                    const prevPoint = trail[index - 1];
+                    return (
+                        <line
+                            key={index}
+                            x1={prevPoint.y}
+                            y1={prevPoint.x}
+                            x2={point.y}
+                            y2={point.x}
+                            stroke="white"
+                            strokeWidth="3"
+                            strokeOpacity={(5000 - (Date.now() - point.timestamp)) / 5000}
+                        />
+                    );
+                })}
+            </svg>
         </div>
     );
 };
