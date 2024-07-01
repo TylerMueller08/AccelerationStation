@@ -26,7 +26,10 @@ const ManualControlEnabledComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${manualControlEnabled == null ? 'unknown' : manualControlEnabled ? 'true' : 'false'}`}></div>
+        <>
+            <p className="fault-name">Manual Control: </p>
+            <div className={`fault-status ${manualControlEnabled == null ? 'unknown' : manualControlEnabled ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

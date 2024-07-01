@@ -21,7 +21,8 @@ import ManualControlEnabledComponent from "./components/Faults/ManualControlEnab
 import FieldOrientationComponent from "./components/Field/FieldOrientation";
 import CameraDisplayComponent from "./components/Camera/CameraDisplay";
 import ConnectionSettingsComponent from "./components/Connection";
-import GridTitleComponent from "./components/Titles/GridTitle";
+import TitleRenameComponent from "./components/Titles/TitleRename";
+import SliderRenameComponent from "./components/Titles/SliderRename";
 
 const App: React.FC = () => {
     return (
@@ -46,44 +47,38 @@ const App: React.FC = () => {
             </div>
             <div className="main">
                 <div className="card">
-                    <GridTitleComponent componentId={1}/>
+                    <TitleRenameComponent componentId={1}/>
                     <RobotConnectionComponent/>
                     <RobotTimerComponent/>
                     <CANBusUtilizationComponent/>
                     </div>
                 <div className="card">
-                    <GridTitleComponent componentId={2}/>
+                    <TitleRenameComponent componentId={2}/>
                     <CameraDisplayComponent/>
                 </div>
                 <div className="card">
-                    <GridTitleComponent componentId={3}/>
+                    <TitleRenameComponent componentId={3}/>
                     <div className="status-grid">
-                        <p className="fault-name">Radio Connecting: </p>
                         <RobotConnectingComponent/>
-                        <p className="fault-name">Driver Controller: </p>
                         <DriverControllerConnectedComponent/>
-                        <p className="fault-name">Aux Controller: </p>
                         <AuxControllerConnectedComponent/>
-                        <p className="fault-name">Encoder Failure: </p>
                         <EncoderFailureDetectedComponent/>
-                        <p className="fault-name">Manual Control: </p>
                         <ManualControlEnabledComponent/>
                     </div>
                 </div>
                 <div className="card">
-                    <GridTitleComponent componentId={4}/>
-                    <p>Select an Autonomous</p>
+                    <TitleRenameComponent componentId={4}/>
                     <AutoSelectorComponent/>
                 </div>
                 <div className="card">
-                    <GridTitleComponent componentId={5}/>
+                    <TitleRenameComponent componentId={5}/>
                     <div className="switch-grid">
-                        <p className="switch-name">Functions Checked</p>
+                        <SliderRenameComponent componentId={1}/>
                         <label className="switch">
                             <input type="checkbox"></input>
                             <span className="slider round"></span>
                         </label>
-                        <p className="switch-name">Battery Replaced</p>
+                        <SliderRenameComponent componentId={2}/>
                         <label className="switch">
                             <input type="checkbox"></input>
                             <span className="slider round"></span>
@@ -91,19 +86,13 @@ const App: React.FC = () => {
                     </div>
                 </div>
                 <div className="card">
-                    <GridTitleComponent componentId={6}/>
+                    <TitleRenameComponent componentId={6}/>
                     <div className="states-grid">
-                        <p className="state-name">Arm State: </p>
                         <ArmStateComponent/>
-                        <p className="state-name">Primary Encoder: </p>
                         <PrimaryEncoderComponent/>
-                        <p className="state-name">Secondary Encoder: </p>
                         <SecondaryEncoderComponent/>
-                        <p className="state-name">Top Limit Switch: </p>
                         <TopLimitSwitchComponent/>
-                        <p className="state-name">Bottom Limit Switch: </p>
                         <BottomLimitSwitchComponent/>
-                        <p className="state-name">Intake Limit Switch: </p>
                         <IntakeLimitSwitchComponent/>
                     </div>
                 </div>

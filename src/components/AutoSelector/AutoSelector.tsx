@@ -36,6 +36,7 @@ const AutoSelectorComponent: React.FC = () => {
 
     return (
         <div>
+            <p>Select an Autonomous</p>
             <select id="auto-selector" value={autoSelected} onChange={handleSelectionChange}>
                 <option value="Center4Note">Center 4-Note</option>
                 <option value="Center3NoteTop">Center 3-Note Top</option>

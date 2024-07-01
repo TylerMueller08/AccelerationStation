@@ -26,7 +26,10 @@ const AuxControllerConnectedComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${auxControllerConnected == null ? 'unknown' : auxControllerConnected ? 'true' : 'false'}`}></div>
+        <>
+            <p className="fault-name">Aux Controller: </p>
+            <div className={`fault-status ${auxControllerConnected == null ? 'unknown' : auxControllerConnected ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

@@ -26,7 +26,10 @@ const BottomLimitSwitchComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${bottomLimitSwitch == null ? 'unknown' : bottomLimitSwitch ? 'true' : 'false'}`}></div>
+        <>
+            <p className="state-name">Bottom Limit Switch: </p>
+            <div className={`fault-status ${bottomLimitSwitch == null ? 'unknown' : bottomLimitSwitch ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

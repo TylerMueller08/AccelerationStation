@@ -26,7 +26,10 @@ const DriverControllerConnectedComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${driverControllerConnected == null ? 'unknown' : driverControllerConnected ? 'true' : 'false'}`}></div>
+        <>
+            <p className="fault-name">Driver Controller: </p>
+            <div className={`fault-status ${driverControllerConnected == null ? 'unknown' : driverControllerConnected ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

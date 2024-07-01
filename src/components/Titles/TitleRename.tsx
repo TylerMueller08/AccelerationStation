@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material';
 
-interface GridTitleProps {
+interface TitleRenameProps {
     componentId: string | number;
 }
 
-const GridTitleComponent: React.FC<GridTitleProps> = ({ componentId }) => {
+const TitleRenameComponent: React.FC<TitleRenameProps> = ({ componentId }) => {
     const [showDialog, setShowDialog] = useState(false);
     const [title, setTitle] = useState(`Example Title ${componentId}`);
     const [storedTitle, setStoredTitle] = useState("");
@@ -40,7 +40,7 @@ const GridTitleComponent: React.FC<GridTitleProps> = ({ componentId }) => {
         <div>
             <h1 onContextMenu={handleOpenDialog}>{title}</h1>
             <Dialog open={showDialog} onClose={handleCloseDialog}>
-                <DialogTitle>Rename</DialogTitle>
+                <DialogTitle>Rename Title</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
@@ -66,4 +66,4 @@ const GridTitleComponent: React.FC<GridTitleProps> = ({ componentId }) => {
     );
 };
 
-export default GridTitleComponent;
+export default TitleRenameComponent;

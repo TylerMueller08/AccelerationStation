@@ -26,7 +26,10 @@ const EncoderFailureDetectedComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${encoderFailureDetected == null ? 'unknown' : encoderFailureDetected ? 'true' : 'false'}`}></div>
+        <>
+            <p className="fault-name">Encoder Failure: </p>
+            <div className={`fault-status ${encoderFailureDetected == null ? 'unknown' : encoderFailureDetected ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

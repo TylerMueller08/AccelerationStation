@@ -26,7 +26,10 @@ const TopLimitSwitchComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${topLimitSwitch == null ? 'unknown' : topLimitSwitch ? 'true' : 'false'}`}></div>
+        <>
+            <p className="state-name">Top Limit Switch: </p>
+            <div className={`fault-status ${topLimitSwitch == null ? 'unknown' : topLimitSwitch ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 

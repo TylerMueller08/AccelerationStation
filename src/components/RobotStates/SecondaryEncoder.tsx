@@ -26,7 +26,10 @@ const SecondaryEncoderComponent: React.FC = () => {
     }, []);
 
     return (
-        <p className="state-text">{secondaryEncoder == null ? "N/A" : secondaryEncoder}</p>
+        <>
+            <p className="state-name">Secondary Encoder: </p>
+            <p className="state-text">{secondaryEncoder == null ? "N/A" : secondaryEncoder}</p>
+        </>
     );
 };
 

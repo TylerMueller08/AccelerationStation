@@ -26,7 +26,10 @@ const ArmStateComponent: React.FC = () => {
     }, []);
 
     return (
-        <p className="state-text">{armState == null ? "N/A" : armState}</p>
+        <>
+            <p className="state-name">Arm State: </p>
+            <p className="state-text">{armState == null ? "N/A" : armState}</p>
+        </>
     );
 };
 

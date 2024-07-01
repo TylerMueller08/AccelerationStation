@@ -25,7 +25,10 @@ const RobotConnectingComponent: React.FC = () => {
     }
 
     return (
-        <div className={`fault-status ${getClassName()}`}></div>
+        <>
+            <p className="fault-name">Radio Connecting: </p>
+            <div className={`fault-status ${getClassName()}`}></div>
+        </>
     );
 };
 

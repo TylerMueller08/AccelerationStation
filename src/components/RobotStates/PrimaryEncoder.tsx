@@ -26,7 +26,10 @@ const PrimaryEncoderComponent: React.FC = () => {
     }, []);
 
     return (
-        <p className="state-text">{primaryEncoder == null ? "N/A" : primaryEncoder}</p>
+        <>
+            <p className="state-name">Primary Encoder: </p>
+            <p className="state-text">{primaryEncoder == null ? "N/A" : primaryEncoder}</p>
+        </>
     );
 };
 

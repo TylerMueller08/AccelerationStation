@@ -26,7 +26,10 @@ const IntakeLimitSwitchComponent: React.FC = () => {
     }, []);
 
     return (
-        <div className={`fault-status ${intakeLimitSwitch == null ? 'unknown' : intakeLimitSwitch ? 'true' : 'false'}`}></div>
+        <>
+            <p className="state-name">Intake Limit Switch: </p>
+            <div className={`fault-status ${intakeLimitSwitch == null ? 'unknown' : intakeLimitSwitch ? 'true' : 'false'}`}></div>
+        </>
     );
 }
 
