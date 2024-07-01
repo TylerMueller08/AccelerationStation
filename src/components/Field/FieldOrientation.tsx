@@ -27,7 +27,7 @@ const FieldOrientationComponent: React.FC = () => {
         const fieldXPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldXPosition", NetworkTablesTypeInfos.kDouble);
         const fieldYPositionTopic = ntcore.createTopic<number>("/SmartDashboard/FieldYPosition", NetworkTablesTypeInfos.kDouble);
         const fieldRotationTopic = ntcore.createTopic<number>("/SmartDashboard/FieldRotation", NetworkTablesTypeInfos.kDouble);
-        
+
         allianceColorTopic.subscribe((value) => setFieldOrientation(value), true);
         fieldXPositionTopic.subscribe((value) => targetXPosition.current = value * 32.9 - 15.7692307692, true);
         fieldYPositionTopic.subscribe((value) => targetYPosition.current = value * 36.15 - 13.1923076923, true);
@@ -56,23 +56,17 @@ const FieldOrientationComponent: React.FC = () => {
 
     useEffect(() => {
         let animationFrameId: number;
-        
+
         const updatePosition = () => {
-            setXPosition((prev) => {
-                const newX = lerp(prev, targetXPosition.current, 0.1);
-                return newX;
-            });
-            setYPosition((prev) => {
-                const newY = lerp(prev, targetYPosition.current, 0.1);
-                return newY;
-            });
+            setXPosition((prev) => lerp(prev, targetXPosition.current, 0.1));
+            setYPosition((prev) => lerp(prev, targetYPosition.current, 0.1));
             setRotation((prev) => lerp(prev, targetRotation.current, 0.1));
 
             const newTrailPoint = { x: targetXPosition.current, y: targetYPosition.current, timestamp: Date.now() };
             if (trail.length === 0 || trail[trail.length - 1].x !== newTrailPoint.x || trail[trail.length - 1].y !== newTrailPoint.y) {
                 setTrail((trail) => [...trail, newTrailPoint]);
             }
-            
+
             animationFrameId = requestAnimationFrame(updatePosition);
         };
 
@@ -96,27 +90,29 @@ const FieldOrientationComponent: React.FC = () => {
     return (
         <div className="card"
             style={{
-                transform: fieldOrientation == null || fieldOrientation ? 'rotate(0)' : 'rotate(180deg)'
+                transform: fieldOrientation == null || fieldOrientation ? 'rotate(0)' : 'rotate(180deg)',
+                position: 'relative',
             }}
         >
-            <div id="robotframe" 
+            <div id="robotframe"
                 style={{
+                    position: 'absolute',
                     transform: !fieldOrientation
-                    ? `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 215}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
-                    : `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 300}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
+                        ? `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 215}px) rotate(${isConnected ? 180 - rotation : 180}deg)`
+                        : `translate(${isConnected ? yPosition : 140}px, ${isConnected ? xPosition : 300}px) rotate(${isConnected ? 180 - rotation : 0}deg)`
                 }}
             ></div>
-            <svg width="100%" height="100%" style={{ position: 'absolute', top: 15.7692307692, left: 13.1923076923 }}>
+            <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }}>
                 {trail.map((point, index) => {
                     if (index === 0) return null;
                     const prevPoint = trail[index - 1];
                     return (
                         <line
                             key={index}
-                            x1={prevPoint.y}
-                            y1={prevPoint.x}
-                            x2={point.y}
-                            y2={point.x}
+                            x1={prevPoint.y + 13.1923076923}
+                            y1={prevPoint.x + 15.7692307692}
+                            x2={point.y + 13.1923076923}
+                            y2={point.x + 15.7692307692}
                             stroke="yellow"
                             strokeWidth="3"
                             strokeOpacity={(5000 - (Date.now() - point.timestamp)) / 5000}
