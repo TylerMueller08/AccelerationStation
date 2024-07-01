@@ -21,6 +21,7 @@ import ManualControlEnabledComponent from "./components/Faults/ManualControlEnab
 import FieldOrientationComponent from "./components/Field/FieldOrientation";
 import CameraDisplayComponent from "./components/Camera/CameraDisplay";
 import ConnectionSettingsComponent from "./components/Connection";
+import GridTitleComponent from "./components/Titles/GridTitle";
 
 const App: React.FC = () => {
     return (
@@ -45,17 +46,17 @@ const App: React.FC = () => {
             </div>
             <div className="main">
                 <div className="card">
-                    <h1>Robot Information</h1>
+                    <GridTitleComponent componentId={1}/>
                     <RobotConnectionComponent/>
                     <RobotTimerComponent/>
                     <CANBusUtilizationComponent/>
                     </div>
                 <div className="card">
-                    <h1>Camera</h1>
+                    <GridTitleComponent componentId={2}/>
                     <CameraDisplayComponent/>
                 </div>
                 <div className="card">
-                    <h1>Faults Detected</h1>
+                    <GridTitleComponent componentId={3}/>
                     <div className="status-grid">
                         <p className="fault-name">Radio Connecting: </p>
                         <RobotConnectingComponent/>
@@ -70,12 +71,12 @@ const App: React.FC = () => {
                     </div>
                 </div>
                 <div className="card">
-                    <h1>Auto Selector</h1>
+                    <GridTitleComponent componentId={4}/>
                     <p>Select an Autonomous</p>
                     <AutoSelectorComponent/>
                 </div>
                 <div className="card">
-                    <h1>Ready for Match</h1>
+                    <GridTitleComponent componentId={5}/>
                     <div className="switch-grid">
                         <p className="switch-name">Functions Checked</p>
                         <label className="switch">
@@ -90,7 +91,7 @@ const App: React.FC = () => {
                     </div>
                 </div>
                 <div className="card">
-                    <h1>Robot States</h1>
+                    <GridTitleComponent componentId={6}/>
                     <div className="states-grid">
                         <p className="state-name">Arm State: </p>
                         <ArmStateComponent/>

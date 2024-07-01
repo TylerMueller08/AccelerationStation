@@ -35,6 +35,7 @@ h1 {
   font-weight: normal;
   letter-spacing: 1px;
   padding-bottom: 12px;
+  padding-bottom: 0px;
 }
 
 p {
@@ -322,10 +323,6 @@ p {
   padding-left: 30px;
 }
 
-.card:nth-child(3) > h1 {
-  padding-bottom: 0px;
-}
-
 .status-grid {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -342,21 +339,12 @@ p {
   margin: auto 30px auto auto;
   width: 22px;
   height: 22px;
-  /* background-color: red; */
   border-radius: 25px;
   border: 3px solid white;
 }
 
-/* .fault-status:nth-child(2) {
-  background-color: green;
-} */
-
 .card:nth-child(4) {
   grid-area: c4;
-}
-
-.card:nth-child(4) > h1 {
-  padding-bottom: 0px;
 }
 
 #auto-selector {
@@ -373,10 +361,6 @@ p {
 
 .card:nth-child(5) {
   grid-area: c5;
-}
-
-.card:nth-child(5) > h1 {
-  padding-bottom: 0px;
 }
 
 .switch-grid {
@@ -455,10 +439,6 @@ input:checked + .slider:before {
 
 .card:nth-child(6) {
   grid-area: c6;
-}
-
-.card:nth-child(6) > h1 {
-  padding-bottom: 0px;
 }
 
 .states-grid {
