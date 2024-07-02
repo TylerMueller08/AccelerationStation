@@ -62,7 +62,7 @@ const ConnectionSettingsComponent: React.FC = () => {
         <div>
             <h1 id="sidebarTitleText">Dashboard</h1>
             <h1 id="sidebarSubtext">Connection Settings</h1>
-            <div>
+            <div className="button-group">
                 <button id="connectionButton" className="team" onClick={() => handleConnectionTypeChange('teamNumber')}>Team Number</button>
                 <button id="connectionButton" className="dev" onClick={() => handleConnectionTypeChange('development')}>Development</button>
             </div>
@@ -94,7 +94,9 @@ const ConnectionSettingsComponent: React.FC = () => {
                     </div>
                 )}
             </div>
-            <button id="connectButton" onClick={handleConnect}>Connect</button>
+            <div className="centered-button">
+                <button id="connectButton" onClick={handleConnect}>Connect</button>
+            </div>
             <h1 id="sidebarInformationSubtitle">Information</h1>
             <p id="sidebarText"><span>Connected to Robot:</span><br/>{connectedURI}:{connectedPort}</p>
             <p id="sidebarText"><span>Camera Address:</span><br/>{localStorage.getItem('cameraIp')}</p>

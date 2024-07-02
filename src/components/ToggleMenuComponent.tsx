@@ -8,12 +8,10 @@ const ToggleMenuComponent: React.FC = () => {
         const sidebar = document.getElementsByClassName('sidebar')[0] as HTMLElement;
         if (!isLeftMenuActive) {
             sidebar.classList.add('visible');
-            sidebar.setAttribute("style", "width: 430px; visibility: visible;");
             main.setAttribute("style", "filter: blur(2px);");
             isLeftMenuActive = true;
         } else {
             sidebar.classList.remove('visible');
-            sidebar.setAttribute("style", "width: 0; visibility: hidden;");
             main.setAttribute("style", "filter: blur(0);");
             isLeftMenuActive = false;
         }
