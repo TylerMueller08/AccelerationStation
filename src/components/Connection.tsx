@@ -1,6 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import { ntcore, setConnectionByTeamNumber, setConnectionByURI } from "../ntcoreInstance";
-import { NetworkTablesTypeInfos } from "ntcore-ts-client";
 
 const saveToLocalStorage = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
@@ -18,6 +17,8 @@ const ConnectionSettingsComponent: React.FC = () => {
     const [connectionType, setConnectionType] = useState<string>(getFromLocalStorage('connectionType', 'teamNumber'));
     const [teamNumber, setTeamNumber] = useState<string>(getFromLocalStorage('teamNumber', '4593'));
     const [ipAddress, setIpAddress] = useState<string>(getFromLocalStorage('ipAddress', '127.0.0.1'));
+    const [connectedURI, setConnectedURI] = useState<string>(ntcore.getURI());
+    const [connectedPort, setConnectedPort] = useState<number>(ntcore.getPort());
 
     useEffect(() => {
         saveToLocalStorage('connectionType', connectionType);
@@ -45,6 +46,17 @@ const ConnectionSettingsComponent: React.FC = () => {
             setConnectionByURI(ipAddress);
         }
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+                setConnectedURI(ntcore.getURI());
+                setConnectedPort(ntcore.getPort());
+        }, 1000);
+
+        return() => {
+            clearInterval(interval);
+        }
+    }, []);
 
     return (
         <div>
@@ -83,8 +95,12 @@ const ConnectionSettingsComponent: React.FC = () => {
                 )}
             </div>
             <button id="connectButton" onClick={handleConnect}>Connect</button>
+            <h1 id="sidebarInformationSubtitle">Information</h1>
+            <p id="sidebarText"><span>Connected to Robot:</span><br/>{connectedURI}:{connectedPort}</p>
+            <p id="sidebarText"><span>Camera Address:</span><br/>{localStorage.getItem('cameraIp')}</p>
+            <p id="sidebarFooter">Created by<br/>4593 Rapid Acceleration</p>
         </div>
-    );
+    )
 };
 
 export default ConnectionSettingsComponent;

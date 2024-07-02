@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ntcore } from "../../ntcoreInstance";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 
-const CameraDisplayComponent: React.FC = () => {
+export const CameraDisplayComponent: React.FC = () => {
     const [cameraUrl, setCameraUrl] = useState<string>(null);
     const [showDialog, setShowDialog] = useState(false);
     const [storedCamera, setStoredCamera] = useState("");

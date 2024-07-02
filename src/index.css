@@ -64,12 +64,12 @@ p {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 10px; /* Ensure space at the bottom */
 }
 
 #sidebarTitleText,
 #sidebarSubtext,
-#connectionLabel {
+#connectionLabel,
+#sidebarFooter {
   opacity: 0;
   transform: translateX(-100%);
   transition: opacity 0.8s, transform 0.8s;
@@ -94,16 +94,46 @@ p {
   transform: translateX(0);
 }
 
+.sidebar.visible #sidebarFooter {
+  opacity: 1;
+  transform: translateX(0), translateY(310%);
+}
+
 #sidebarTitleText {
   font-size: 22pt;
   letter-spacing: 5px;
   text-align: center;
 }
 
+span {
+  font-size: 12pt;
+}
+
 #sidebarSubtext {
   font-size: 16pt;
   letter-spacing: 3px;
   text-align: center;
+}
+
+#sidebarFooter {
+  text-align: center;
+  font-size: 11pt;
+  letter-spacing: 2px;
+  color: lightgrey;
+  transform: translateY(310%);
+}
+
+#sidebarInformationSubtitle {
+  font-size: 16pt;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-top: 60px;
+}
+
+#sidebarText {
+  text-align: center;
+  font-size: 10.5pt;
+  letter-spacing: 1px;
 }
 
 #connectionLabel {

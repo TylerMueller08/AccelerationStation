@@ -85,7 +85,6 @@ const App: React.FC = () => {
                         <SmartDashboardItem componentId={8}/>
                         <SmartDashboardItem componentId={9}/>
                         <SmartDashboardItem componentId={10}/>
-                        
                     </div>
                 </div>
                 <FieldOrientationComponent/>
