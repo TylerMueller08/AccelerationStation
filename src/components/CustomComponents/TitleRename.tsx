@@ -6,8 +6,21 @@ interface TitleRenameProps {
 }
 
 const TitleRenameComponent: React.FC<TitleRenameProps> = ({ componentId }) => {
+    const getDefaultTitle = (id: string | number) => {
+        switch (id) {
+            case 1:
+                return "Robot Information";
+            case 2:
+                return "Camera";
+            case 4:
+                return "Auto Selector";
+            default:
+                return `Example Title ${id}`;
+        }
+    };
+
     const [showDialog, setShowDialog] = useState(false);
-    const [title, setTitle] = useState(`Example Title ${componentId}`);
+    const [title, setTitle] = useState(getDefaultTitle(componentId));
     const [storedTitle, setStoredTitle] = useState("");
 
     useEffect(() => {
@@ -36,9 +49,11 @@ const TitleRenameComponent: React.FC<TitleRenameProps> = ({ componentId }) => {
         setTitle(event.target.value);
     };
 
+    const titleClass = componentId === 1 || componentId === 2 ? 'titleClass' : '';
+
     return (
         <div>
-            <h1 onContextMenu={handleOpenDialog}>{title}</h1>
+            <h1 className={titleClass} onContextMenu={handleOpenDialog}>{title}</h1>
             <Dialog open={showDialog} onClose={handleCloseDialog}>
                 <DialogTitle>Rename Title</DialogTitle>
                 <DialogContent>

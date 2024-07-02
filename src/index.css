@@ -111,7 +111,7 @@ p {
   text-align: center;
 }
 
-#connectionInput, #cameraIpInput {
+#connectionInput {
   border: 2px solid white;
   border-radius: 10px;
   width: 100px;
@@ -122,11 +122,6 @@ p {
   color: white;
   font-size: 11pt;
   font-family: mokoto;
-}
-
-#cameraIpInput {
-  width: 200px;
-  margin-top: 7px;
 }
 
 #connectionButton {
@@ -157,10 +152,6 @@ p {
   height: 35px;
   margin-top: 25px;
   margin-left: 143px;
-}
-
-.cameraIP {
-  margin-top: 60px;
 }
 
 .main {
@@ -459,6 +450,10 @@ input:checked + .slider:before {
   text-align: right;
   margin-right: 30px;
   white-space: nowrap;
+}
+
+.titleClass {
+  padding-bottom: 6px;
 }
 
 .card:nth-child(7) {

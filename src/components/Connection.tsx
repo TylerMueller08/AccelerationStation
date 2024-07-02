@@ -18,15 +18,13 @@ const ConnectionSettingsComponent: React.FC = () => {
     const [connectionType, setConnectionType] = useState<string>(getFromLocalStorage('connectionType', 'teamNumber'));
     const [teamNumber, setTeamNumber] = useState<string>(getFromLocalStorage('teamNumber', '4593'));
     const [ipAddress, setIpAddress] = useState<string>(getFromLocalStorage('ipAddress', '127.0.0.1'));
-    const [cameraIp, setCameraIp] = useState<string>(getFromLocalStorage('cameraIp', 'https://i.imgur.com/cVotd4I.png'));
 
     useEffect(() => {
         saveToLocalStorage('connectionType', connectionType);
         saveToLocalStorage('teamNumber', teamNumber);
         saveToLocalStorage('ipAddress', ipAddress);
-        saveToLocalStorage('cameraIp', cameraIp)
 
-    }, [connectionType, teamNumber, ipAddress, cameraIp]);
+    }, [connectionType, teamNumber, ipAddress]);
 
     const handleConnectionTypeChange = (type: string) => {
         setConnectionType(type);
@@ -47,29 +45,6 @@ const ConnectionSettingsComponent: React.FC = () => {
             setConnectionByURI(ipAddress);
         }
     };
-
-    const cameraIPStreamTopic = ntcore.createTopic<string>("/SmartDashboard/CameraIPStream", NetworkTablesTypeInfos.kString);
-    cameraIPStreamTopic.publish();
-
-    const handleCameraIpChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if (connectionType == 'teamNumber') {
-            cameraIPStreamTopic.setValue(event.target.value);
-        }
-    };
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            if (ntcore.isRobotConnected()) {
-                if (connectionType == 'development') {
-                    cameraIPStreamTopic.setValue('https://i.imgur.com/hEAVye5.png');
-                }
-            }
-        }, 1000);
-
-        return() => {
-            clearInterval(interval);
-        }
-    }, []);
 
     return (
         <div>
@@ -108,19 +83,6 @@ const ConnectionSettingsComponent: React.FC = () => {
                 )}
             </div>
             <button id="connectButton" onClick={handleConnect}>Connect</button>
-
-            {connectionType === 'teamNumber' && (
-                <div id="connectionLabel" className="cameraIP">
-                    <label>
-                        Camera IP:<br/>
-                        <input
-                            id="cameraIpInput"
-                            type="text"
-                            onChange={handleCameraIpChange}
-                        />
-                    </label>
-                </div>
-            )}
         </div>
     );
 };
