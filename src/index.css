@@ -446,16 +446,19 @@ input:checked + .slider:before {
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   row-gap: 5px;
+  white-space: nowrap;
 }
 
 .state-name {
   text-align: left;
   margin-left: 30px;
+  white-space: nowrap;
 }
 
 .state-text {
   text-align: right;
   margin-right: 30px;
+  white-space: nowrap;
 }
 
 .card:nth-child(7) {

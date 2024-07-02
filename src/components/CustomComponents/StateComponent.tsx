@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { NetworkTablesTypeInfos } from "ntcore-ts-client";
 import { ntcore } from "../../ntcoreInstance";
@@ -13,6 +13,7 @@ const SmartDashboardItem: React.FC<SmartDashboardItemProps> = ({ componentId }) 
     const [type, setType] = useState<string>("string");
     const [topic, setTopic] = useState<string>("");
     const [value, setValue] = useState<any>(null);
+    const currentTopicRef = useRef<any>(null);
 
     useEffect(() => {
         const storedLabel = localStorage.getItem(`label_${componentId}`);
@@ -41,9 +42,14 @@ const SmartDashboardItem: React.FC<SmartDashboardItemProps> = ({ componentId }) 
                     topicType = NetworkTablesTypeInfos.kString;
                     break;
             }
+
+            if (currentTopicRef.current) {
+                currentTopicRef.current.unsubscribeAll();
+            }
             
             try {
                 const ntTopic = ntcore.createTopic<any>(`/SmartDashboard/${topic}`, topicType);
+                currentTopicRef.current = ntTopic;
 
                 ntTopic.subscribe((value) => {
                     setValue(value);
@@ -65,6 +71,12 @@ const SmartDashboardItem: React.FC<SmartDashboardItemProps> = ({ componentId }) 
                 setValue(null);
             } 
         }
+
+        return () => {
+            if (currentTopicRef.current) {
+                currentTopicRef.current.unsubscribeAll();
+            }
+        };
     }, [topic, type]);
 
     const handleOpenDialog = () => {
@@ -82,6 +94,17 @@ const SmartDashboardItem: React.FC<SmartDashboardItemProps> = ({ componentId }) 
         setShowDialog(false);
     };
 
+    const formatNumber = (num: number | null): string => {
+        if (num == null) return "N/A";
+        if (typeof num !== "number") return "N/A";
+
+        if (Number.isInteger(num)) {
+            return num.toFixed(0);
+        } else {
+            return num.toFixed(3);
+        }
+    }
+
     return (
         <>
             <p className="state-name" onContextMenu={handleOpenDialog}>{label}:</p>
@@ -90,7 +113,7 @@ const SmartDashboardItem: React.FC<SmartDashboardItemProps> = ({ componentId }) 
             ) : type === "boolean" ? (
                 <div className={`fault-status ${value == null ? 'unknown' : value ? 'true' : 'false'}`}></div>
             ) : type === "number" ? (
-                <p className="state-text">{value == null ? "N/A" : value}</p>
+                <p className="state-text">{formatNumber(value)}</p>
             ) : null}
             <Dialog open={showDialog} onClose={handleCloseDialog}>
                 <DialogTitle>Edit Item</DialogTitle>
