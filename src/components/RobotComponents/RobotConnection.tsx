@@ -14,7 +14,7 @@ const RobotConnectionComponent: React.FC = () => {
     }, []);
 
     return (
-        <p id="robot-state">Connection: {robotConnected ? 'Connected' : 'Disconnected'}</p>
+        <p id="robot-state">Status: {robotConnected ? 'Connected' : 'Disconnected'}</p>
     );
 };
 

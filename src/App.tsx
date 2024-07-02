@@ -3,26 +3,17 @@ import CloseButtonComponent from "./components/CloseButton";
 import MinimizeButtonComponent from "./components/MinimizeButton";
 import MaximizeButtonComponent from "./components/MaximizeButton";
 import ToggleMenuComponent from "./components/ToggleMenuComponent";
-import RobotConnectionComponent from "./components/RobotInformation/RobotConnection";
-import RobotConnectingComponent from "./components/Faults/RobotConnecting";
-import ArmStateComponent from "./components/RobotStates/ArmState";
-import RobotTimerComponent from "./components/RobotInformation/RobotTimer";
-import PrimaryEncoderComponent from "./components/RobotStates/PrimaryEncoder";
-import SecondaryEncoderComponent from "./components/RobotStates/SecondaryEncoder";
-import BottomLimitSwitchComponent from "./components/RobotStates/BottomLimitSwitch";
-import TopLimitSwitchComponent from "./components/RobotStates/TopLimitSwitch";
-import IntakeLimitSwitchComponent from "./components/RobotStates/IntakeLimitSwitch";
-import AutoSelectorComponent from "./components/AutoSelector/AutoSelector";
-import DriverControllerConnectedComponent from "./components/Faults/DriverControllerConnected";
-import AuxControllerConnectedComponent from "./components/Faults/AuxControllerConnected";
-import CANBusUtilizationComponent from "./components/RobotInformation/CANBusUtilization";
-import EncoderFailureDetectedComponent from "./components/Faults/EncoderFailureDetected";
-import ManualControlEnabledComponent from "./components/Faults/ManualControlEnabled";
-import FieldOrientationComponent from "./components/Field/FieldOrientation";
-import CameraDisplayComponent from "./components/Camera/CameraDisplay";
+import RobotConnectionComponent from "./components/RobotComponents/RobotConnection";
+import RobotConnectingComponent from "./components/RobotComponents/RobotConnecting";
+import RobotTimerComponent from "./components/RobotComponents/RobotTimer";
+import AutoSelectorComponent from "./components/RobotComponents/AutoSelector";
+import CANBusUtilizationComponent from "./components/RobotComponents/CANBusUtilization";
+import FieldOrientationComponent from "./components/RobotComponents/FieldOrientation";
+import CameraDisplayComponent from "./components/RobotComponents/CameraDisplay";
 import ConnectionSettingsComponent from "./components/Connection";
-import TitleRenameComponent from "./components/Titles/TitleRename";
-import SliderRenameComponent from "./components/Titles/SliderRename";
+import TitleRenameComponent from "./components/CustomComponents/TitleRename";
+import SliderRenameComponent from "./components/CustomComponents/SliderRename";
+import SmartDashboardItem from "./components/CustomComponents/StateComponent";
 
 const App: React.FC = () => {
     return (
@@ -60,10 +51,10 @@ const App: React.FC = () => {
                     <TitleRenameComponent componentId={3}/>
                     <div className="status-grid">
                         <RobotConnectingComponent/>
-                        <DriverControllerConnectedComponent/>
-                        <AuxControllerConnectedComponent/>
-                        <EncoderFailureDetectedComponent/>
-                        <ManualControlEnabledComponent/>
+                        <SmartDashboardItem componentId={1}/>
+                        <SmartDashboardItem componentId={2}/>
+                        <SmartDashboardItem componentId={3}/>
+                        <SmartDashboardItem componentId={4}/>
                     </div>
                 </div>
                 <div className="card">
@@ -88,12 +79,13 @@ const App: React.FC = () => {
                 <div className="card">
                     <TitleRenameComponent componentId={6}/>
                     <div className="states-grid">
-                        <ArmStateComponent/>
-                        <PrimaryEncoderComponent/>
-                        <SecondaryEncoderComponent/>
-                        <TopLimitSwitchComponent/>
-                        <BottomLimitSwitchComponent/>
-                        <IntakeLimitSwitchComponent/>
+                        <SmartDashboardItem componentId={5}/>
+                        <SmartDashboardItem componentId={6}/>
+                        <SmartDashboardItem componentId={7}/>
+                        <SmartDashboardItem componentId={8}/>
+                        <SmartDashboardItem componentId={9}/>
+                        <SmartDashboardItem componentId={10}/>
+                        
                     </div>
                 </div>
                 <FieldOrientationComponent/>
