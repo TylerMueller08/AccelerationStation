@@ -81,11 +81,7 @@ To add these custom values to the dashboard, right click on any `Example Label (
 3. Enter the SmartDashboard Topic - The **second** argument in the code referenced above. It is case-sensitive.
 
 For example, if I want to use the 3rd option in the code above, `DriverControllerConnected`, I would enter the following in the dialog box:
-```
-Label = Driver Controller
-Type = Boolean
-SmartDashboard Topic = DriverControllerConnected
-```
+[Dialog Box Example](https://imgur.com/f2lVLnc.png)
 
 ## Further Updates
 Acceleration Station was intended as an off-season project created by Tyler Mueller from FRC Team 4593 Rapid Acceleration. Further updates and ease of customization will be worked on prior to build and competition seasons. Please notify me of any issues and recommendations that arise. Good luck!
