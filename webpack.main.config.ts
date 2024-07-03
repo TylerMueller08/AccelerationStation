@@ -18,3 +18,4 @@ export const mainConfig: Configuration = {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
   },
 };
+// CREATED BY FRC TEAM 4593 Rapid Acceleration
