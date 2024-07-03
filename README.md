@@ -81,6 +81,7 @@ To add these custom values to the dashboard, right click on any `Example Label (
 3. Enter the SmartDashboard Topic - The **second** argument in the code referenced above. It is case-sensitive.
 
 For example, if I want to use the 3rd option in the code above, `DriverControllerConnected`, I would enter the following in the dialog box:
+
 ![Dialog Box Example](https://imgur.com/DPo4hBy.png)
 
 ## Further Updates
