@@ -2,6 +2,7 @@
 Acceleration Station is a custom dashboard for FIRST Robotics Competition created by Team 4593 Rapid Acceleration. The low-resource, customizable dashboard communicates over WPILib's NetworkTable 4.0 protocol using [ntcore-ts-client](https://github.com/cjlawson02/ntcore-ts-client). Acceleration Station offers robot information, camera, autonomous selector, slider checks, and a playing field that reports the robot's odometry. The remaining of the dashboard may be customized to strings, numbers, or boolean variables published on SmartDashboard.
 
 ![Acceleration Station](https://i.imgur.com/gWwypVS.png)
+![Acceleration Station NEW](https://i.imgur.com/Di3hqCA.png)
 
 ## Features
 * Robot Information
