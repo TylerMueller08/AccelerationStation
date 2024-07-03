@@ -19,7 +19,6 @@ const SliderRenameComponent: React.FC<SliderRenameProps> = ({ componentId }) => 
     }, [componentId]);
 
     const handleOpenDialog = (event: React.MouseEvent<HTMLParagraphElement>) => {
-        // event.preventDefault(); // Prevent default right-click context menu
         setShowDialog(true);
     };
 

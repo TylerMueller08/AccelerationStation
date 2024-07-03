@@ -23,7 +23,7 @@ const App: React.FC = () => {
                 <div className="titleBar">
                     <ToggleMenuComponent/>
                     <div className="title">
-                        Rapid Acceleration Station
+                        Acceleration Station
                     </div>
                 </div>
                 <div className="titleBarButtons">

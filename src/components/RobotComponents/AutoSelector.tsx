@@ -20,7 +20,6 @@ const AutoSelectorComponent: React.FC = () => {
     const [showAddDialog, setShowAddDialog] = useState(false);
 
     useEffect(() => {
-        // Load autos from local storage or use default options
         const savedAutos = JSON.parse(localStorage.getItem("autoOptions")) || [
             { name: "Example Auto 1", value: "ExampleAuto1" },
             { name: "Example Auto 2", value: "ExampleAuto2" },
@@ -28,7 +27,6 @@ const AutoSelectorComponent: React.FC = () => {
         ];
         setAutoOptions(savedAutos);
 
-        // Subscribe to auto selector topic
         const autoSelectedTopic = ntcore.createTopic<string>("/SmartDashboard/AutoSelector", NetworkTablesTypeInfos.kString);
         autoSelectedTopic.publish();
         autoSelectedTopic.subscribe((value) => {
@@ -48,7 +46,6 @@ const AutoSelectorComponent: React.FC = () => {
         };
     }, []);
 
-    // Update local storage whenever autoOptions change
     useEffect(() => {
         localStorage.setItem("autoOptions", JSON.stringify(autoOptions));
     }, [autoOptions]);

@@ -29,7 +29,6 @@ const FieldOrientationComponent: React.FC = () => {
     const targetRotation = useRef(0);
 
     useEffect(() => {
-        // Load saved dimensions from local storage
         const savedRobotLength = localStorage.getItem("robotLength");
         const savedRobotWidth = localStorage.getItem("robotWidth");
         const savedRobotLengthInput = localStorage.getItem("robotLengthInput");
@@ -51,14 +50,13 @@ const FieldOrientationComponent: React.FC = () => {
         fieldRotationTopic.subscribe((value) => targetRotation.current = value, true);
 
         const interval = setInterval(() => {
-            const connected = ntcore.isRobotConnected();
-            if (connected) {
+            if (ntcore.isRobotConnected()) {
                 setIsConnected(true);
                 if (Math.abs(fieldXPositionTopic.getValue()) < 0.01 && Math.abs(fieldYPositionTopic.getValue()) < 0.01) {
                     setIsConnected(false);
                 }
             } else {
-                setFieldOrientation(null);
+                setFieldOrientation(true);
                 setXPosition(0);
                 setYPosition(0);
                 setRotation(0);
