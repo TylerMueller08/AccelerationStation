@@ -1,5 +1,5 @@
 name: accelerationstation
-description: "A new Flutter project."
+description: "2025 FIRST Robotics Competition dashboard created by Team 4593 Rapid Acceleration"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -34,6 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  window_manager: ^0.4.3
+  nt4: ^1.3.3
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +53,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
