@@ -32,7 +32,7 @@ class DashboardState {
     matchTimeSub = client.subscribePeriodic('/SmartDashboard/MatchTime', 1.0);
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
 
-    reefPosePub = client.publishNewTopic('/Dashboard/TargetReefPose', NT4TypeStr.typeInt);
+    reefPosePub = client.publishNewTopic('/SmartDashboard/TargetReefPose', NT4TypeStr.typeInt);
     branchHeightPub = client.publishNewTopic('/Dashboard/TargetBranchHeight', NT4TypeStr.typeInt);
 
     client.setProperties(reefPosePub, false, true);
@@ -80,7 +80,7 @@ class DashboardState {
   }
 
   void sendAll() {
-    // client.addSample(reefPosePub, _reefPose);
-    // client.addSample(branchHeightPub, _branchHeight);
+    client.addSample(reefPosePub, _reefPose);
+    client.addSample(branchHeightPub, _branchHeight);
   }
 }
