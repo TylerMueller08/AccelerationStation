@@ -1,5 +1,6 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
 import 'package:accelerationstation/widgets/branch_selector.dart';
+import 'package:accelerationstation/widgets/confirm_button.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
 import 'package:accelerationstation/widgets/reef_selector.dart';
 import 'package:flutter/material.dart';
@@ -95,9 +96,19 @@ class _DashboardState extends State<Dashboard> {
                     redAlliance: _redAlliance,
                   )
                 ],
+              ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: EdgeInsets.only(),
+                child: ConfirmButton(
+                  dashboardState: widget.dashboardState,
+                  redAlliance: _redAlliance,
+                )
               )
-              )
-            )
+            ),
           ],
         ),
       ),

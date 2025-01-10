@@ -41,29 +41,6 @@ class BranchSelectorState extends State<BranchSelector> {
               child: Transform.scale(
                 scale: 2.25,
                 child: Checkbox(
-                  value: selected == 0,
-                  splashRadius: 9,
-                  checkColor: Colors.white,
-                  activeColor: activeColor,
-                  shape: const CircleBorder(),
-                  side: const BorderSide(width: 0.5, color: Colors.grey),
-                  onChanged: (value) {
-                    setState(() {
-                      if (value ?? false) {
-                        selected = 0;
-                        widget.dashboardState.setBranchHeight(selected);
-                      }
-                    });
-                  },
-                ),
-              ),
-            ),
-            Positioned(
-              left: 25,
-              bottom: 160,
-              child: Transform.scale(
-                scale: 2.25,
-                child: Checkbox(
                   value: selected == 1,
                   splashRadius: 9,
                   checkColor: Colors.white,
@@ -83,7 +60,7 @@ class BranchSelectorState extends State<BranchSelector> {
             ),
             Positioned(
               left: 25,
-              bottom: 235,
+              bottom: 160,
               child: Transform.scale(
                 scale: 2.25,
                 child: Checkbox(
@@ -106,7 +83,7 @@ class BranchSelectorState extends State<BranchSelector> {
             ),
             Positioned(
               left: 25,
-              bottom: 340,
+              bottom: 235,
               child: Transform.scale(
                 scale: 2.25,
                 child: Checkbox(
@@ -120,6 +97,29 @@ class BranchSelectorState extends State<BranchSelector> {
                     setState(() {
                       if (value ?? false) {
                         selected = 3;
+                        widget.dashboardState.setBranchHeight(selected);
+                      }
+                    });
+                  },
+                ),
+              ),
+            ),
+            Positioned(
+              left: 25,
+              bottom: 340,
+              child: Transform.scale(
+                scale: 2.25,
+                child: Checkbox(
+                  value: selected == 4,
+                  splashRadius: 9,
+                  checkColor: Colors.white,
+                  activeColor: activeColor,
+                  shape: const CircleBorder(),
+                  side: const BorderSide(width: 0.5, color: Colors.grey),
+                  onChanged: (value) {
+                    setState(() {
+                      if (value ?? false) {
+                        selected = 4;
                         widget.dashboardState.setBranchHeight(selected);
                       }
                     });

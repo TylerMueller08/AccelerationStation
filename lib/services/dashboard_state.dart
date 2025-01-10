@@ -13,9 +13,11 @@ class DashboardState {
 
   late NT4Topic reefPosePub;
   late NT4Topic branchHeightPub;
+  late NT4Topic confirmedPub;
   
   int _reefPose = 1;
   int _branchHeight = 1;
+  bool _confirmed = false;
 
   bool connected = false;
 
@@ -34,9 +36,11 @@ class DashboardState {
 
     reefPosePub = client.publishNewTopic('/SmartDashboard/TargetReefPose', NT4TypeStr.typeInt);
     branchHeightPub = client.publishNewTopic('/Dashboard/TargetBranchHeight', NT4TypeStr.typeInt);
+    confirmedPub = client.publishNewTopic('/SmartDashboard/ConfirmedCondition', NT4TypeStr.typeBool);
 
     client.setProperties(reefPosePub, false, true);
     client.setProperties(branchHeightPub, false, true);
+    client.setProperties(confirmedPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -66,21 +70,27 @@ class DashboardState {
   }
 
   void setReefPose(int reefPose) {
-    if (reefPose <= 6 && reefPose >= 1) {
+    if (reefPose <= 12 && reefPose >= 1) {
       _reefPose = reefPose;
       client.addSample(reefPosePub, _reefPose);
     }
   }
   
   void setBranchHeight(int branchHeight) {
-    if (branchHeight <= 6 && branchHeight >= 1) {
+    if (branchHeight <= 4 && branchHeight >= 1) {
       _branchHeight = branchHeight;
       client.addSample(branchHeightPub, _branchHeight);
     }
   }
 
+  void setConfirmedCondition(bool confirmed) {
+    _confirmed = confirmed;
+    client.addSample(confirmedPub, _confirmed);
+  }
+
   void sendAll() {
     client.addSample(reefPosePub, _reefPose);
     client.addSample(branchHeightPub, _branchHeight);
+    client.addSample(confirmedPub, _confirmed);
   }
 }
