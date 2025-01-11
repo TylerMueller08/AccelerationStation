@@ -52,6 +52,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 1;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -75,6 +76,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 2;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -98,6 +100,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 3;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -121,6 +124,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 4;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -144,6 +148,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 5;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -167,6 +172,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 6;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -190,6 +196,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 7;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -213,6 +220,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 8;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -236,6 +244,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 9;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -259,6 +268,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 10;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -282,6 +292,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 11;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },
@@ -305,6 +316,7 @@ class ReefSelectorState extends State<ReefSelector> {
                       if (value ?? false) {
                         selected = 12;
                         widget.dashboardState.setReefPose(selected);
+                        widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
                   },

@@ -17,10 +17,24 @@ class ConfirmButton extends StatefulWidget {
 
 class ConfirmButtonState extends State<ConfirmButton> {
   bool confirmed = false;
+  late bool completed;
 
   @override
   void initState() {
     super.initState();
+    completed = widget.dashboardState.completed;
+
+    widget.dashboardState.completedSub.stream().listen((value) {
+      if (value is bool) {
+        setState(() {
+          completed = value;
+          if (completed) {
+            confirmed = false;
+            widget.dashboardState.setConfirmedCondition(confirmed);
+          }
+        });
+      }
+    });
   }
 
   @override
@@ -28,8 +42,8 @@ class ConfirmButtonState extends State<ConfirmButton> {
     Color activeColor = widget.redAlliance ? Colors.red[700]! : Colors.indigo;
 
     return SizedBox(
-      width: 150,
-      height: 100,
+      width: 225,
+      height: 80,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, backgroundColor: activeColor,
@@ -37,22 +51,17 @@ class ConfirmButtonState extends State<ConfirmButton> {
             borderRadius: BorderRadius.circular(25),
           ),
         ),
-        onPressed: () async {
-          setState(() {
-            confirmed = true;
+        onPressed: () {
+          if (!completed) {
+            setState(() {
+              confirmed = true;
+            });
             widget.dashboardState.setConfirmedCondition(confirmed);
-          });
-
-          await Future.delayed(const Duration(seconds: 1));
-          
-          setState(() {
-            confirmed = false;
-            widget.dashboardState.setConfirmedCondition(confirmed);
-          });
+          }
         },
-        child: const Text(
-          "Confirm",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        child: Text(
+          confirmed ? "Confirmed" : "Confirm",
+          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
       ),
     );

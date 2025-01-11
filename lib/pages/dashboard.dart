@@ -100,9 +100,9 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: EdgeInsets.only(),
+                padding: EdgeInsets.only(bottom: 15),
                 child: ConfirmButton(
                   dashboardState: widget.dashboardState,
                   redAlliance: _redAlliance,
