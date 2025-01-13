@@ -10,7 +10,6 @@ class DashboardState {
 
   late NT4Subscription matchTimeSub;
   late NT4Subscription redAllianceSub;
-  late NT4Subscription completedSub;
 
   late NT4Topic reefPosePub;
   late NT4Topic branchHeightPub;
@@ -19,8 +18,6 @@ class DashboardState {
   int _reefPose = 1;
   int _branchHeight = 1;
   bool _confirmed = false;
-
-  bool completed = false;
 
   bool connected = false;
 
@@ -36,21 +33,14 @@ class DashboardState {
 
     matchTimeSub = client.subscribePeriodic('/SmartDashboard/MatchTime', 1.0);
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
-    completedSub = client.subscribePeriodic('/SmartDashboard/CompletedCondition', 1.0);
 
-    reefPosePub = client.publishNewTopic('/SmartDashboard/TargetReefPose', NT4TypeStr.typeInt);
-    branchHeightPub = client.publishNewTopic('/Dashboard/TargetBranchHeight', NT4TypeStr.typeInt);
+    reefPosePub = client.publishNewTopic('/SmartDashboard/TargetReefBranch', NT4TypeStr.typeInt);
+    branchHeightPub = client.publishNewTopic('/SmartDashboard/TargetBranchHeight', NT4TypeStr.typeInt);
     confirmedPub = client.publishNewTopic('/SmartDashboard/ConfirmedCondition', NT4TypeStr.typeBool);
 
     client.setProperties(reefPosePub, false, true);
     client.setProperties(branchHeightPub, false, true);
     client.setProperties(confirmedPub, false, true);
-
-    completedSub.stream().listen((value) {
-      if (value is bool) {
-        completed = value;
-      }
-    });
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -94,11 +84,7 @@ class DashboardState {
   }
 
   void setConfirmedCondition(bool confirmed) {
-    if (completed) {
-      _confirmed = false;
-    } else {
-      _confirmed = confirmed;
-    }
+    _confirmed = confirmed;
     client.addSample(confirmedPub, _confirmed);
   }
 

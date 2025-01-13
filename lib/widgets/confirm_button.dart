@@ -17,24 +17,28 @@ class ConfirmButton extends StatefulWidget {
 
 class ConfirmButtonState extends State<ConfirmButton> {
   bool confirmed = false;
-  late bool completed;
 
   @override
   void initState() {
     super.initState();
-    completed = widget.dashboardState.completed;
+  }
 
-    widget.dashboardState.completedSub.stream().listen((value) {
-      if (value is bool) {
+  void onConfirmPressed() {
+    if (!confirmed) {
+      setState(() {
+        confirmed = true;
+      });
+
+      widget.dashboardState.setConfirmedCondition(true);
+
+      Future.delayed(const Duration(seconds: 2), () {
         setState(() {
-          completed = value;
-          if (completed) {
-            confirmed = false;
-            widget.dashboardState.setConfirmedCondition(confirmed);
-          }
+          confirmed = false;
         });
-      }
-    });
+
+        widget.dashboardState.setConfirmedCondition(false);
+      });
+    }
   }
 
   @override
@@ -51,14 +55,7 @@ class ConfirmButtonState extends State<ConfirmButton> {
             borderRadius: BorderRadius.circular(25),
           ),
         ),
-        onPressed: () {
-          if (!completed) {
-            setState(() {
-              confirmed = true;
-            });
-            widget.dashboardState.setConfirmedCondition(confirmed);
-          }
-        },
+        onPressed: onConfirmPressed,
         child: Text(
           confirmed ? "Confirmed" : "Confirm",
           style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
