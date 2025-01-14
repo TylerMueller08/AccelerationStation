@@ -41,7 +41,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 1,
+                  value: selected == 2 || selected == 20,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -50,8 +50,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 1;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 20 : 2;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -65,7 +65,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 2,
+                  value: selected == 1 || selected == 19,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -74,8 +74,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 2;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 19 : 1;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -89,7 +89,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 3,
+                  value: selected == 12 || selected == 18,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -98,8 +98,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 3;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 18 : 12;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -113,7 +113,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 4,
+                  value: selected == 11 || selected == 17,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -122,8 +122,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 4;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 17 : 11;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -137,7 +137,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 5,
+                  value: selected == 10 || selected == 16,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -146,8 +146,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 5;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 16 : 10;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -161,7 +161,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 6,
+                  value: selected == 9 || selected == 15,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -170,8 +170,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 6;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 15 : 9;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -185,7 +185,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 7,
+                  value: selected == 8 || selected == 14,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -194,8 +194,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 7;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 14 : 8;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -209,7 +209,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 8,
+                  value: selected == 7 || selected == 13,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -218,8 +218,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 8;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 13 : 7;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -233,7 +233,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 9,
+                  value: selected == 6 || selected == 24,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -242,8 +242,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 9;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 24 : 6;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -257,7 +257,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 10,
+                  value: selected == 5 || selected == 23,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -266,8 +266,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 10;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 23 : 5;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -281,7 +281,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 11,
+                  value: selected == 4 || selected == 22,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -290,8 +290,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 11;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 22 : 4;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
@@ -305,7 +305,7 @@ class ReefSelectorState extends State<ReefSelector> {
               child: Transform.scale(
                 scale: 3.5,
                 child: Checkbox(
-                  value: selected == 12,
+                  value: selected == 3 || selected == 21,
                   splashRadius: 9,
                   checkColor: Colors.white,
                   activeColor: activeColor,
@@ -314,8 +314,8 @@ class ReefSelectorState extends State<ReefSelector> {
                   onChanged: (value) {
                     setState(() {
                       if (value ?? false) {
-                        selected = 12;
-                        widget.dashboardState.setReefPose(selected);
+                        selected = widget.redAlliance ? 21 : 3;
+                        widget.dashboardState.setReefPose(widget.redAlliance ? selected - 12 : selected);
                         widget.dashboardState.setConfirmedCondition(false);
                       }
                     });
