@@ -28,8 +28,8 @@ class MatchTimer extends StatelessWidget {
           child: Text(
             timeString,
             style: const TextStyle(
-              fontSize: 200,
-              height: 1.0,
+              fontSize: 140,
+              height: 1.0
             ),
           ),
         );

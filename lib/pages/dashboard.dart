@@ -1,8 +1,7 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
-import 'package:accelerationstation/widgets/branch_selector.dart';
 import 'package:accelerationstation/widgets/confirm_button.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
-import 'package:accelerationstation/widgets/reef_selector.dart';
+import 'package:accelerationstation/widgets/pose_selector.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -43,60 +42,20 @@ class _DashboardState extends State<Dashboard> {
         descendantsAreTraversable: false,
         child: Stack(
           children: [
+            // Align(
+            //   alignment: Alignment.bottomCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(bottom: 15),
+            //     child: MatchTimer(
+            //       dashboardState: widget.dashboardState,
+            //     ),
+            //   ),
+            // ),
             Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text(
-                  'Created by Tyler Mueller',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: StreamBuilder(
-                  stream: widget.dashboardState.connectionStatus(),
-                  builder: (context, snapshot) {
-                    bool connected = snapshot.data ?? false;
-
-                    return Text(
-                      'NetworkTables V4.1: ${connected ? 'Connected' : 'Disconnected'}',
-                      style: TextStyle(
-                        color: connected ? Colors.green : Colors.red,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 120, bottom: 90),
-                child: ReefSelector(
-                  dashboardState: widget.dashboardState,
-                  redAlliance: _redAlliance,
-                )
-              )
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.only(right: 175, top: 25),
-                child: Column(
-                children: [
-                  MatchTimer(dashboardState: widget.dashboardState),
-                  BranchSelector(
-                    dashboardState: widget.dashboardState,
-                    redAlliance: _redAlliance,
-                  )
-                ],
-              ),
+              alignment: Alignment.center,
+              child: PoseSelector(
+                dashboardState: widget.dashboardState,
+                redAlliance: _redAlliance,
               ),
             ),
             Align(
@@ -106,8 +65,8 @@ class _DashboardState extends State<Dashboard> {
                 child: ConfirmButton(
                   dashboardState: widget.dashboardState,
                   redAlliance: _redAlliance,
-                )
-              )
+                ),
+              ),
             ),
           ],
         ),
