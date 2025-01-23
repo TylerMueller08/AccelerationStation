@@ -59,7 +59,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 1 : 25;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -83,7 +82,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 2 : 26;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -107,7 +105,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 3 : 27;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -131,7 +128,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 4 : 28;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -155,7 +151,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 5 : 29;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -179,7 +174,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 6 : 30;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -203,7 +197,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 7 : 19;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -227,7 +220,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 8 : 20;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -251,7 +243,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 9 : 21;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -275,7 +266,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 10 : 22;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -300,7 +290,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 11 : 23;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -324,7 +313,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 12 : 24;
                               widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -366,7 +354,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 13 : 31;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -390,7 +377,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 14 : 32;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -414,7 +400,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 15 : 33;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -456,7 +441,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 16 : 34;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -480,7 +464,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 17 : 35;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },
@@ -504,7 +487,6 @@ class PoseSelectorState extends State<PoseSelector> {
                             if (value ?? false) {
                               selected = widget.redAlliance ? 18 : 36;
                               widget.dashboardState.setTargetPose(selected);
-                              widget.dashboardState.setConfirmedCondition(false);
                             }
                           });
                         },

@@ -1,5 +1,4 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
-import 'package:accelerationstation/widgets/confirm_button.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
 import 'package:accelerationstation/widgets/pose_selector.dart';
 import 'package:flutter/material.dart';
@@ -42,15 +41,15 @@ class _DashboardState extends State<Dashboard> {
         descendantsAreTraversable: false,
         child: Stack(
           children: [
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: Padding(
-            //     padding: const EdgeInsets.only(bottom: 15),
-            //     child: MatchTimer(
-            //       dashboardState: widget.dashboardState,
-            //     ),
-            //   ),
-            // ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: MatchTimer(
+                  dashboardState: widget.dashboardState,
+                ),
+              ),
+            ),
             Align(
               alignment: Alignment.center,
               child: PoseSelector(
@@ -59,12 +58,35 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 15),
-                child: ConfirmButton(
-                  dashboardState: widget.dashboardState,
-                  redAlliance: _redAlliance,
+                padding: const EdgeInsets.all(4.0),
+                child: Text(
+                  'Created by Tyler Mueller',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: StreamBuilder(
+                  stream: widget.dashboardState.connectionStatus(),
+                  builder: (context, snapshot) {
+                    bool connected = snapshot.data ?? false;
+
+                    return Text(
+                      'NetworkTables V4.1: ${connected ? 'Connected' : 'Disconnected'}',
+                      style: TextStyle(
+                        color: connected ? Colors.green : Colors.red,
+                        fontSize: 13,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

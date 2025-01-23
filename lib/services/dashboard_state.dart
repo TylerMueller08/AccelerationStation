@@ -12,10 +12,8 @@ class DashboardState {
   late NT4Subscription redAllianceSub;
 
   late NT4Topic targetPosePub;
-  late NT4Topic confirmedPub;
   
   int _reefPose = 1;
-  bool _confirmed = false;
 
   bool connected = false;
 
@@ -33,10 +31,8 @@ class DashboardState {
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
-    confirmedPub = client.publishNewTopic('/SmartDashboard/ConfirmedCondition', NT4TypeStr.typeBool);
 
     client.setProperties(targetPosePub, false, true);
-    client.setProperties(confirmedPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -72,13 +68,7 @@ class DashboardState {
     }
   }
 
-  void setConfirmedCondition(bool confirmed) {
-    _confirmed = confirmed;
-    client.addSample(confirmedPub, _confirmed);
-  }
-
   void sendAll() {
     client.addSample(targetPosePub, _reefPose);
-    client.addSample(confirmedPub, _confirmed);
   }
 }
