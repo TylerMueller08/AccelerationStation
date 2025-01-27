@@ -12,8 +12,10 @@ class DashboardState {
   late NT4Subscription redAllianceSub;
 
   late NT4Topic targetPosePub;
+  late NT4Topic targetElevatorHeightPub;
   
   int _reefPose = 1;
+  int _elevatorHeight = 1;
 
   bool connected = false;
 
@@ -31,8 +33,10 @@ class DashboardState {
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
+    targetElevatorHeightPub = client.publishNewTopic('/SmartDashboard/TargetElevatorHeight', NT4TypeStr.typeInt);
 
     client.setProperties(targetPosePub, false, true);
+    client.setProperties(targetElevatorHeightPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -68,7 +72,15 @@ class DashboardState {
     }
   }
 
+  void setTargetElevatorHeight(int elevatorHeight) {
+    if (elevatorHeight <= 36 && elevatorHeight >= 1) {
+      _elevatorHeight = elevatorHeight;
+      client.addSample(targetElevatorHeightPub, _elevatorHeight);
+    }
+  }
+
   void sendAll() {
     client.addSample(targetPosePub, _reefPose);
+    client.addSample(targetElevatorHeightPub, _elevatorHeight);
   }
 }

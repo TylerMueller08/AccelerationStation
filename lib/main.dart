@@ -11,7 +11,7 @@ void main() async {
     size: Size(1310, 720),
     minimumSize: Size(1310, 720),
     center: true,
-    title: 'Dashboard',
+    title: 'Rapid Acceleration Station',
   );
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {

@@ -1,4 +1,5 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
+import 'package:accelerationstation/widgets/elevator_selector.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
 import 'package:accelerationstation/widgets/pose_selector.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,16 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 120, bottom: 70),
+                  child: ElevatorSelector(
+                  dashboardState: widget.dashboardState,
+                  redAlliance: _redAlliance,
+                ),
+              ),
+            ),
+            Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -65,6 +76,7 @@ class _DashboardState extends State<Dashboard> {
                   'Created by Tyler Mueller',
                   style: TextStyle(
                     color: Colors.grey,
+                    fontFamily: "Cascadia Code",
                     fontSize: 13,
                   ),
                 ),
@@ -80,9 +92,10 @@ class _DashboardState extends State<Dashboard> {
                     bool connected = snapshot.data ?? false;
 
                     return Text(
-                      'NetworkTables V4.1: ${connected ? 'Connected' : 'Disconnected'}',
+                      'NetworkTables ${connected ? 'Connected' : 'Disconnected'}',
                       style: TextStyle(
                         color: connected ? Colors.green : Colors.red,
+                        fontFamily: "Cascadia Code",
                         fontSize: 13,
                       ),
                     );
