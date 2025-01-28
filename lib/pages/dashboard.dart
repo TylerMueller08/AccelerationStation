@@ -49,14 +49,14 @@ class _DashboardState extends State<Dashboard> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
+                  padding: const EdgeInsets.only(bottom: 35),
                   child: MatchTimer(
                     dashboardState: widget.dashboardState,
                   ),
                 ),
               ),
               Align(
-                alignment: Alignment.center,
+                alignment: Alignment.topCenter,
                 child: PoseSelector(
                   dashboardState: widget.dashboardState,
                   redAlliance: _redAlliance,
@@ -65,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 120, bottom: 70),
+                  padding: const EdgeInsets.only(left: 175, bottom: 90),
                   child: ElevatorSelector(
                     dashboardState: widget.dashboardState,
                     redAlliance: _redAlliance,
@@ -81,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
                     style: TextStyle(
                       color: Colors.grey,
                       fontFamily: "Cascadia Code",
-                      fontSize: 13,
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -100,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
                         style: TextStyle(
                           color: connected ? Colors.green : Colors.red,
                           fontFamily: "Cascadia Code",
-                          fontSize: 13,
+                          fontSize: 16,
                         ),
                       );
                     },

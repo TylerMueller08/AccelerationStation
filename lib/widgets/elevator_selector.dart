@@ -28,15 +28,15 @@ class ElevatorSelectorState extends State<ElevatorSelector> {
     Color activeColor = widget.redAlliance ? Colors.red[700]! : Colors.indigo;
 
     return SizedBox(
-      width: 150,
-      height: 300,
+      width: 200,
+      height: 400,
       child: Stack(
         children: [
           Positioned(
             left: 60,
             top: 0,
             child: Transform.scale(
-              scale: 3.75,
+              scale: 4.75,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -73,9 +73,9 @@ class ElevatorSelectorState extends State<ElevatorSelector> {
           ),
           Positioned(
             left: 60,
-            top: 80,
+            top: 100,
             child: Transform.scale(
-              scale: 3.75,
+              scale: 4.75,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -112,9 +112,9 @@ class ElevatorSelectorState extends State<ElevatorSelector> {
           ),
           Positioned(
             left: 60,
-            top: 160,
+            top: 200,
             child: Transform.scale(
-              scale: 3.75,
+              scale: 4.75,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -151,9 +151,9 @@ class ElevatorSelectorState extends State<ElevatorSelector> {
           ),
           Positioned(
             left: 60,
-            top: 240,
+            top: 300,
             child: Transform.scale(
-              scale: 3.75,
+              scale: 4.75,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

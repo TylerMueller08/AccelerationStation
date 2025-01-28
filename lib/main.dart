@@ -8,8 +8,8 @@ void main() async {
   await windowManager.ensureInitialized();
 
   WindowOptions windowOptions = const WindowOptions(
-    size: Size(1310, 720),
-    minimumSize: Size(1310, 720),
+    size: Size(1920, 1080),
+    minimumSize: Size(1920, 1080),
     center: true,
     title: 'Rapid Acceleration Station',
   );

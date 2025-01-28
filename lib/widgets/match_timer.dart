@@ -30,7 +30,7 @@ class MatchTimer extends StatelessWidget {
             style: const TextStyle(
               fontFamily: "Cascadia Code",
               letterSpacing: -8,
-              fontSize: 140,
+              fontSize: 180,
               height: 1.0
             ),
           ),

@@ -28,25 +28,25 @@ class PoseSelectorState extends State<PoseSelector> {
     Color activeColor = widget.redAlliance ? Colors.red[700]! : Colors.indigo;
   
     return SizedBox(
-      width: 1310,
-      height: 720,
+      width: 1920,
+      height: 1080,
       child: Stack(
         children: [
           // Reef Selector
           Positioned(
-            left: 396,
-            bottom: 140,
+            left: 660,
+            bottom: 275,
             child: SizedBox(
-              width: 500,
-              height: 500,
+              width: 600,
+              height: 600,
               child: Stack(
                 children: [
                   widget.redAlliance ? Image.asset('images/red_reef.png') : Image.asset('images/blue_reef.png'),
                   Positioned(
-                    left: 192,
-                    bottom: 38,
+                    left: 220,
+                    bottom: 53,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 1 || selected == 25,
                         splashRadius: 9,
@@ -66,10 +66,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 192,
-                    bottom: 38,
+                    right: 220,
+                    bottom: 53,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 2 || selected == 26,
                         splashRadius: 9,
@@ -89,10 +89,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 87,
-                    bottom: 100,
+                    right: 114,
+                    bottom: 115,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 3 || selected == 27,
                         splashRadius: 9,
@@ -112,10 +112,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 44,
-                    bottom: 173,
+                    right: 53,
+                    bottom: 222,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 4 || selected == 28,
                         splashRadius: 9,
@@ -135,10 +135,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 44,
-                    top: 173,
+                    right: 53,
+                    top: 222,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 5 || selected == 29,
                         splashRadius: 9,
@@ -158,10 +158,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 87,
-                    top: 100,
+                    right: 114,
+                    top: 115,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 6 || selected == 30,
                         splashRadius: 9,
@@ -181,10 +181,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 192,
-                    top: 38,
+                    right: 220,
+                    top: 51,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 7 || selected == 19,
                         splashRadius: 9,
@@ -204,10 +204,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 192,
-                    top: 38,
+                    left: 220,
+                    top: 51,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 8 || selected == 20,
                         splashRadius: 9,
@@ -227,10 +227,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 87,
-                    top: 100,
+                    left: 114,
+                    top: 115,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 9 || selected == 21,
                         splashRadius: 9,
@@ -250,10 +250,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 44,
-                    top: 173,
+                    left: 53,
+                    top: 222,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 10 || selected == 22,
                         splashRadius: 9,
@@ -274,10 +274,10 @@ class PoseSelectorState extends State<PoseSelector> {
                   ),
                   // 11
                   Positioned(
-                    left: 44,
-                    bottom: 173,
+                    left: 53,
+                    bottom: 222,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 11 || selected == 23,
                         splashRadius: 9,
@@ -297,10 +297,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 87,
-                    bottom: 100,
+                    left: 114,
+                    bottom: 115,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 12 || selected == 24,
                         splashRadius: 9,
@@ -329,8 +329,8 @@ class PoseSelectorState extends State<PoseSelector> {
             left: 0,
             bottom: 0,
             child: SizedBox(
-              width: 350,
-              height: 210,
+              width: 450,
+              height: 270,
               child: Stack(
                 children: [
                   Transform.flip(
@@ -338,10 +338,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     child: Image.asset('images/coral_station.png'),
                   ),
                   Positioned(
-                    left: 47,
-                    bottom: 150,
+                    left: 65,
+                    bottom: 198,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 13 || selected == 31,
                         splashRadius: 9,
@@ -361,10 +361,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 150,
-                    bottom: 90,
+                    left: 200,
+                    bottom: 118,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 14 || selected == 32,
                         splashRadius: 9,
@@ -384,10 +384,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    left: 253,
-                    bottom: 30,
+                    left: 330,
+                    bottom: 40,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 15 || selected == 33,
                         splashRadius: 9,
@@ -416,8 +416,8 @@ class PoseSelectorState extends State<PoseSelector> {
             right: 0,
             bottom: 0,
             child: SizedBox(
-              width: 350,
-              height: 210,
+              width: 450,
+              height: 270,
               child: Stack(
                 children: [
                   Transform.flip(
@@ -425,10 +425,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     child: Image.asset('images/coral_station.png'),
                   ),
                   Positioned(
-                    right: 47,
-                    bottom: 150,
+                    right: 65,
+                    bottom: 198,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 16 || selected == 34,
                         splashRadius: 9,
@@ -448,10 +448,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 150,
-                    bottom: 90,
+                    right: 200,
+                    bottom: 118,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 17 || selected == 35,
                         splashRadius: 9,
@@ -471,10 +471,10 @@ class PoseSelectorState extends State<PoseSelector> {
                     ),
                   ),
                   Positioned(
-                    right: 253,
-                    bottom: 30,
+                    right: 330,
+                    bottom: 40,
                     child: Transform.scale(
-                      scale: 3.5,
+                      scale: 5,
                       child: Checkbox(
                         value: selected == 18 || selected == 36,
                         splashRadius: 9,
