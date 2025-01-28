@@ -34,76 +34,81 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    double scaleFactor = 1.0;
+
     return Scaffold(
       body: Focus(
         skipTraversal: true,
         canRequestFocus: false,
         descendantsAreFocusable: false,
         descendantsAreTraversable: false,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: MatchTimer(
-                  dashboardState: widget.dashboardState,
+        child: Transform.scale(
+          scale: scaleFactor,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 15),
+                  child: MatchTimer(
+                    dashboardState: widget.dashboardState,
+                  ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: PoseSelector(
-                dashboardState: widget.dashboardState,
-                redAlliance: _redAlliance,
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 120, bottom: 70),
-                  child: ElevatorSelector(
+              Align(
+                alignment: Alignment.center,
+                child: PoseSelector(
                   dashboardState: widget.dashboardState,
                   redAlliance: _redAlliance,
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text(
-                  'Created by Tyler Mueller',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontFamily: "Cascadia Code",
-                    fontSize: 13,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 120, bottom: 70),
+                  child: ElevatorSelector(
+                    dashboardState: widget.dashboardState,
+                    redAlliance: _redAlliance,
                   ),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: StreamBuilder(
-                  stream: widget.dashboardState.connectionStatus(),
-                  builder: (context, snapshot) {
-                    bool connected = snapshot.data ?? false;
-
-                    return Text(
-                      'NetworkTables ${connected ? 'Connected' : 'Disconnected'}',
-                      style: TextStyle(
-                        color: connected ? Colors.green : Colors.red,
-                        fontFamily: "Cascadia Code",
-                        fontSize: 13,
-                      ),
-                    );
-                  },
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    'Created by Tyler Mueller',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontFamily: "Cascadia Code",
+                      fontSize: 13,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: StreamBuilder(
+                    stream: widget.dashboardState.connectionStatus(),
+                    builder: (context, snapshot) {
+                      bool connected = snapshot.data ?? false;
+
+                      return Text(
+                        'NetworkTables ${connected ? 'Connected' : 'Disconnected'}',
+                        style: TextStyle(
+                          color: connected ? Colors.green : Colors.red,
+                          fontFamily: "Cascadia Code",
+                          fontSize: 13,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
