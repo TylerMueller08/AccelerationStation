@@ -13,9 +13,11 @@ class DashboardState {
 
   late NT4Topic targetPosePub;
   late NT4Topic targetElevatorHeightPub;
+  late NT4Topic selectedAutonPub;
   
   int _reefPose = 1;
   int _elevatorHeight = 1;
+  String _selectedAuton = 'Do Nothing';
 
   bool connected = false;
 
@@ -34,9 +36,11 @@ class DashboardState {
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
     targetElevatorHeightPub = client.publishNewTopic('/SmartDashboard/TargetElevatorHeight', NT4TypeStr.typeInt);
+    selectedAutonPub = client.publishNewTopic('/SmartDashboard/SelectedAutonomous', NT4TypeStr.typeStr);
 
     client.setProperties(targetPosePub, false, true);
     client.setProperties(targetElevatorHeightPub, false, true);
+    client.setProperties(selectedAutonPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -79,8 +83,14 @@ class DashboardState {
     }
   }
 
+  void setSelectedAutonomous(String selectedAuton) {
+    _selectedAuton = selectedAuton;
+    client.addSample(selectedAutonPub, _selectedAuton);
+  }
+
   void sendAll() {
     client.addSample(targetPosePub, _reefPose);
     client.addSample(targetElevatorHeightPub, _elevatorHeight);
+    client.addSample(selectedAutonPub, _selectedAuton);
   }
 }
