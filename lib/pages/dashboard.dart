@@ -1,6 +1,5 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
 import 'package:accelerationstation/widgets/autonomous_selector.dart';
-import 'package:accelerationstation/widgets/elevator_selector.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
 import 'package:accelerationstation/widgets/pose_selector.dart';
 import 'package:flutter/material.dart';
@@ -66,17 +65,7 @@ class _DashboardState extends State<Dashboard> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 175, bottom: 90),
-                  child: ElevatorSelector(
-                    dashboardState: widget.dashboardState,
-                    redAlliance: _redAlliance,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 175, bottom: 90),
+                  padding: const EdgeInsets.only(left: 180),
                   child: AutonomousSelector(
                     dashboardState: widget.dashboardState,
                     redAlliance: _redAlliance,

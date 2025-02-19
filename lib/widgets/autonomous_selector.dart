@@ -19,8 +19,11 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
   final List<String> autonModes = [
     'Do Nothing',
     'Top, Move Out',
+    'Top, 1-Coral',
     'Center, Move Out',
-    'Bottom, Move Out'
+    'Center, 1-Coral',
+    'Bottom, Move Out',
+    'Bottom, 1-Coral'
   ];
 
   String selectedAuton = 'Do Nothing';
@@ -35,13 +38,13 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
     Color activeColor = widget.redAlliance ? Colors.red[700]! : Colors.indigo;
 
     return SizedBox(
-      width: 325,
-      height: 600,
+      width: 350,
+      height: 800,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Select Autonomous:",
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold)),
           SizedBox(height: 8),
           for (var mode in autonModes)
             Padding(
@@ -50,7 +53,7 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 275,
+                    width: 300,
                     child: Text(
                       mode,
                       style: TextStyle(
