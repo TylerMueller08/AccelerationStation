@@ -17,7 +17,6 @@ class DashboardState {
   
   int _reefPose = 1;
   String _selectedAuton = 'Do Nothing';
-  bool _manualControl = false;
 
   bool connected = false;
 
@@ -36,11 +35,9 @@ class DashboardState {
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
     selectedAutonPub = client.publishNewTopic('/SmartDashboard/SelectedAutonomous', NT4TypeStr.typeStr);
-    manualControlPub = client.publishNewTopic('/SmartDashboard/ManualControl', NT4TypeStr.typeBool);
 
     client.setProperties(targetPosePub, false, true);
     client.setProperties(selectedAutonPub, false, true);
-    client.setProperties(manualControlPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (connected) {
@@ -81,14 +78,8 @@ class DashboardState {
     client.addSample(selectedAutonPub, _selectedAuton);
   }
 
-  void setManualControl(bool manualControl) {
-    _manualControl = manualControl;
-    client.addSample(manualControlPub, _manualControl);
-  }
-
   void sendAll() {
     client.addSample(targetPosePub, _reefPose);
     client.addSample(selectedAutonPub, _selectedAuton);
-    client.addSample(manualControlPub, _manualControl);
   }
 }
