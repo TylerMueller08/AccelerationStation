@@ -18,12 +18,12 @@ class AutonomousSelector extends StatefulWidget {
 class AutonomousSelectorState extends State<AutonomousSelector> {
   final List<String> autonModes = [
     'Do Nothing',
-    'Top, Move Out',
-    'Top, 1-Coral',
+    'Left, Move Out',
+    'Left, 1-Coral',
     'Center, Move Out',
     'Center, 1-Coral',
-    'Bottom, Move Out',
-    'Bottom, 1-Coral'
+    'Right, Move Out',
+    'Right, 1-Coral'
   ];
 
   String selectedAuton = 'Do Nothing';
