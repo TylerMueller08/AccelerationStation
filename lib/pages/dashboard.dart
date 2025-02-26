@@ -65,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 180),
+                  padding: const EdgeInsets.only(left: 180, top: 50),
                   child: AutonomousSelector(
                     dashboardState: widget.dashboardState,
                     redAlliance: _redAlliance,

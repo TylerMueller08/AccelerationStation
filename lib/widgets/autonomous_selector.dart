@@ -20,10 +20,12 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
     'Do Nothing',
     'Left, Move Out',
     'Left, 1-Coral',
+    'Left, 2-Coral',
     'Center, Move Out',
     'Center, 1-Coral',
     'Right, Move Out',
-    'Right, 1-Coral'
+    'Right, 1-Coral',
+    'Right, 2-Coral'
   ];
 
   String selectedAuton = 'Do Nothing';
@@ -39,7 +41,7 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
 
     return SizedBox(
       width: 350,
-      height: 800,
+      height: 1000,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
