@@ -44,7 +44,91 @@ class PoseSelectorState extends State<PoseSelector> {
         children: [
           buildReefSelector(posePositions, activeColor),
           buildCoralStation(left: true, startPose: 13, activeColor: activeColor),
-          buildCoralStation(left: false, startPose: 16, activeColor: activeColor)
+          buildCoralStation(left: false, startPose: 16, activeColor: activeColor),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 200),
+              child: Text(
+                'A',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 350, right: 525),
+              child: Text(
+                'B',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 670, right: 525),
+              child: Text(
+                'C',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 820),
+              child: Text(
+                'D',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 670, left: 525),
+              child: Text(
+                'E',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 350, left: 525),
+              child: Text(
+                'F',
+                style: TextStyle(
+                  color: activeColor,
+                  fontFamily: "Cascadia Code",
+                  fontSize: 92,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
