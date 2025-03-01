@@ -50,7 +50,7 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
           SizedBox(height: 8),
           for (var mode in autonModes)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 18),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
