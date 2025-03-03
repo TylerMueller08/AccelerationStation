@@ -43,8 +43,8 @@ class PoseSelectorState extends State<PoseSelector> {
       child: Stack(
         children: [
           buildReefSelector(posePositions, activeColor),
-          buildCoralStation(left: true, startPose: 13, activeColor: activeColor),
-          buildCoralStation(left: false, startPose: 16, activeColor: activeColor),
+          buildCoralStation(left: true, startPose: 25, activeColor: activeColor),
+          buildCoralStation(left: false, startPose: 28, activeColor: activeColor),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -147,7 +147,7 @@ class PoseSelectorState extends State<PoseSelector> {
             ...List.generate(positions.length, (index) {
               return buildPoseCheckbox(
                 position: positions[index],
-                poseId: widget.redAlliance ? index + 1 : (index > 5 ? index + 13 : index + 25),
+                poseId: widget.redAlliance ? index + 13 : index + 1,
                 isReef: true,
                 activeColor: activeColor,
               );
@@ -182,7 +182,7 @@ class PoseSelectorState extends State<PoseSelector> {
 
               return buildPoseCheckbox(
                 position: positions[index],
-                poseId: widget.redAlliance ? startPose + index : startPose + 18 + index,
+                poseId: widget.redAlliance ? startPose + index : startPose + 6 + index,
                 isReef: false,
                 activeColor: activeColor,
               );
@@ -215,7 +215,7 @@ class PoseSelectorState extends State<PoseSelector> {
                 if (!isReef) {
                   widget.dashboardState.setTargetPose(selected);
                 } else {
-                  widget.dashboardState.setTargetPose(widget.redAlliance ? selected : selected - 18);
+                  widget.dashboardState.setTargetPose(widget.redAlliance ? selected - 12 : selected);
                 }
               }
             });
