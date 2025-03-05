@@ -10,6 +10,7 @@ class DashboardState {
 
   late NT4Subscription matchTimeSub;
   late NT4Subscription redAllianceSub;
+  late NT4Subscription manualControlSub;
 
   late NT4Topic targetPosePub;
   late NT4Topic targetArmivatorStatePub;
@@ -33,6 +34,7 @@ class DashboardState {
 
     matchTimeSub = client.subscribePeriodic('/SmartDashboard/MatchTime', 1.0);
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
+    manualControlSub = client.subscribePeriodic('/SmartDashboard/ManualControl', 0.5);
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
     targetArmivatorStatePub = client.publishNewTopic('/SmartDashboard/TargetArmivatorState', NT4TypeStr.typeInt);
@@ -63,6 +65,14 @@ class DashboardState {
 
   Stream<bool> isRedAlliance() async* {
     await for (final value in redAllianceSub.stream(yieldAll: true)) {
+      if (value is bool) {
+        yield value;
+      }
+    }
+  }
+
+  Stream<bool> isManualControl() async* {
+    await for (final value in manualControlSub.stream(yieldAll: true)) {
       if (value is bool) {
         yield value;
       }

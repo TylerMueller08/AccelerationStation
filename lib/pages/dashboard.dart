@@ -1,6 +1,7 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
 import 'package:accelerationstation/widgets/armivator_selector.dart';
 import 'package:accelerationstation/widgets/autonomous_selector.dart';
+import 'package:accelerationstation/widgets/manual_control.dart';
 import 'package:accelerationstation/widgets/match_timer.dart';
 import 'package:accelerationstation/widgets/pose_selector.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,15 @@ class _DashboardState extends State<Dashboard> {
                   child: ArmivatorSelector(
                     dashboardState: widget.dashboardState,
                     redAlliance: _redAlliance,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 50, right: 50),
+                  child: ManualControlIndicator(
+                    dashboardState: widget.dashboardState,
                   ),
                 ),
               ),
