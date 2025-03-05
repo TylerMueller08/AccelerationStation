@@ -12,10 +12,11 @@ class DashboardState {
   late NT4Subscription redAllianceSub;
 
   late NT4Topic targetPosePub;
+  late NT4Topic targetArmivatorStatePub;
   late NT4Topic selectedAutonPub;
-  late NT4Topic manualControlPub;
   
   int _reefPose = 1;
+  int _armivatorState = 1;
   String _selectedAuton = 'Do Nothing';
 
   bool connected = false;
@@ -34,9 +35,11 @@ class DashboardState {
     redAllianceSub = client.subscribePeriodic('/FMSInfo/IsRedAlliance', 1.0);
 
     targetPosePub = client.publishNewTopic('/SmartDashboard/TargetDashboardPose', NT4TypeStr.typeInt);
+    targetArmivatorStatePub = client.publishNewTopic('/SmartDashboard/TargetArmivatorState', NT4TypeStr.typeInt);
     selectedAutonPub = client.publishNewTopic('/SmartDashboard/SelectedAutonomous', NT4TypeStr.typeStr);
 
     client.setProperties(targetPosePub, false, true);
+    client.setProperties(targetArmivatorStatePub, false, true);
     client.setProperties(selectedAutonPub, false, true);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -73,6 +76,13 @@ class DashboardState {
     }
   }
 
+  void setTargetArmivatorState(int armivatorState) {
+    if (armivatorState >= 1 && armivatorState <= 4) {
+      _armivatorState = armivatorState;
+      client.addSample(targetArmivatorStatePub, _armivatorState);
+    }
+  }
+
   void setSelectedAutonomous(String selectedAuton) {
     _selectedAuton = selectedAuton;
     client.addSample(selectedAutonPub, _selectedAuton);
@@ -80,6 +90,7 @@ class DashboardState {
 
   void sendAll() {
     client.addSample(targetPosePub, _reefPose);
+    client.addSample(targetArmivatorStatePub, _armivatorState);
     client.addSample(selectedAutonPub, _selectedAuton);
   }
 }
