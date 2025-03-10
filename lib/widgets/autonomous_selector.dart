@@ -17,6 +17,7 @@ class AutonomousSelector extends StatefulWidget {
 
 class AutonomousSelectorState extends State<AutonomousSelector> {
   final Map<String, List<String>> autonModes = {
+    'Do Nothing' : [],
     'Left': ['Move Out', '1-Coral', '2-Coral', '3-Coral'],
     'Center': ['Move Out', '1-Coral'],
     'Right': ['Move Out', '1-Coral', '2-Coral', '3-Coral']
