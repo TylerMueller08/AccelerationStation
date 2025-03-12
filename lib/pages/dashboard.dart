@@ -36,100 +36,95 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    double scaleFactor = 1.0;
-
     return Scaffold(
       body: Focus(
         skipTraversal: true,
         canRequestFocus: false,
         descendantsAreFocusable: false,
         descendantsAreTraversable: false,
-        child: Transform.scale(
-          scale: scaleFactor,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 35),
-                  child: MatchTimer(
-                    dashboardState: widget.dashboardState,
-                  ),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 35),
+                child: MatchTimer(
+                  dashboardState: widget.dashboardState,
                 ),
               ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: PoseSelector(
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: PoseSelector(
+                dashboardState: widget.dashboardState,
+                redAlliance: _redAlliance,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 100, bottom: 130),
+                child: AutonomousSelector(
                   dashboardState: widget.dashboardState,
                   redAlliance: _redAlliance,
                 ),
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 100, bottom: 130),
-                  child: AutonomousSelector(
-                    dashboardState: widget.dashboardState,
-                    redAlliance: _redAlliance,
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 200, bottom: 60),
+                child: ArmivatorSelector(
+                  dashboardState: widget.dashboardState,
+                  redAlliance: _redAlliance,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50, right: 50),
+                child: ManualControlIndicator(
+                  dashboardState: widget.dashboardState,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(
+                  'Created by Tyler Mueller',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: "Cascadia Code",
+                    fontSize: 16,
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 200, bottom: 60),
-                  child: ArmivatorSelector(
-                    dashboardState: widget.dashboardState,
-                    redAlliance: _redAlliance,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50, right: 50),
-                  child: ManualControlIndicator(
-                    dashboardState: widget.dashboardState,
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(
-                    'Created by Tyler Mueller',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontFamily: "Cascadia Code",
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: StreamBuilder(
-                    stream: widget.dashboardState.connectionStatus(),
-                    builder: (context, snapshot) {
-                      bool connected = snapshot.data ?? false;
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: StreamBuilder(
+                  stream: widget.dashboardState.connectionStatus(),
+                  builder: (context, snapshot) {
+                    bool connected = snapshot.data ?? false;
 
-                      return Text(
-                        'NetworkTables ${connected ? 'Connected' : 'Disconnected'}',
-                        style: TextStyle(
-                          color: connected ? Colors.green : Colors.red,
-                          fontFamily: "Cascadia Code",
-                          fontSize: 16,
-                        ),
-                      );
-                    },
-                  ),
+                    return Text(
+                      'NetworkTables ${connected ? 'Connected' : 'Disconnected'}',
+                      style: TextStyle(
+                        color: connected ? Colors.green : Colors.red,
+                        fontFamily: "Cascadia Code",
+                        fontSize: 16,
+                      ),
+                    );
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
