@@ -18,9 +18,9 @@ class AutonomousSelector extends StatefulWidget {
 class AutonomousSelectorState extends State<AutonomousSelector> {
   final Map<String, List<String>> autonModes = {
     'Do Nothing' : [],
-    'Left': ['Move Out', '1-Coral', '2-Coral', '3-Coral'],
+    'Left': ['Move Out', '1-Coral', '2-Coral', '2.5-Coral'],
     'Center': ['Move Out', '1-Coral'],
-    'Right': ['Move Out', '1-Coral', '2-Coral', '3-Coral']
+    'Right': ['Move Out', '1-Coral', '2-Coral', '2.5-Coral']
   };
 
   String? selectedMainCategory = 'Left';
@@ -63,7 +63,7 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       key,
-                      style: TextStyle(fontSize: 36),
+                      style: TextStyle(fontSize: 36, fontFamily: "Cascadia Code"),
                     ),
                   ),
                 );
@@ -97,7 +97,7 @@ class AutonomousSelectorState extends State<AutonomousSelector> {
                       padding: EdgeInsets.symmetric(horizontal: 16.0),
                       child: Text(
                         subCategory,
-                        style: TextStyle(fontSize: 36),
+                        style: TextStyle(fontSize: 36, fontFamily: "Cascadia Code"),
                       ),
                     ),
                   );
