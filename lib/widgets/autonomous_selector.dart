@@ -1,4 +1,5 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
+import 'package:accelerationstation/services/dashboard_theme.dart';
 import 'package:flutter/material.dart';
 
 class AutonomousSelector extends StatefulWidget {
@@ -12,101 +13,64 @@ class AutonomousSelector extends StatefulWidget {
   });
 
   @override
-  State<AutonomousSelector> createState() => AutonomousSelectorState();
+  State<AutonomousSelector> createState() => _AutonomousSelectorState();
 }
 
-class AutonomousSelectorState extends State<AutonomousSelector> {
-  final Map<String, List<String>> autonModes = {
-    'Do Nothing' : [],
-    'Left': ['Move Out', '1-Coral', '2-Coral', '2.5-Coral'],
-    'Center': ['Move Out', '1-Coral'],
-    'Right': ['Move Out', '1-Coral', '2-Coral', '2.5-Coral']
-  };
+class _AutonomousSelectorState extends State<AutonomousSelector> {
+  final List<String> autonomousOptions = [
+    'Do Nothing',
+    'Example',
+  ];
 
-  String? selectedMainCategory = 'Left';
-  String? selectedSubCategory = 'Move Out';
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  String? selectedAuton = 'Do Nothing';
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 420,
-      height: 230,
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Select Autonomous",
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, fontFamily: "Cascadia Code",)),
-          SizedBox(height: 8),
+          Text(
+            "Select Autonomous",
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              fontFamily: DashboardTheme.font,
+            ),
+          ),
+          const SizedBox(height: 8),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(10),
             ),
             child: DropdownButton<String>(
-              value: selectedMainCategory,
+              value: selectedAuton,
+              isExpanded: true,
+              underline: Container(),
               onChanged: (String? newValue) {
                 setState(() {
-                  selectedMainCategory = newValue;
-                  selectedSubCategory = autonModes[selectedMainCategory!]?[0];
+                  selectedAuton = newValue;
+                  widget.dashboardState.setAutonomous(selectedAuton!);
                 });
               },
-              items: autonModes.keys.map<DropdownMenuItem<String>>((String key) {
+              items: autonomousOptions.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
-                  value: key,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      key,
-                      style: TextStyle(fontSize: 36, fontFamily: "Cascadia Code"),
+                  value: value,
+                  child: Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontFamily: DashboardTheme.font,
                     ),
                   ),
                 );
               }).toList(),
-              isExpanded: true,
-              underline: Container(),
             ),
           ),
-          if (selectedMainCategory != null) ...[
-            SizedBox(height: 16),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: DropdownButton<String>(
-                value: selectedSubCategory,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedSubCategory = newValue;
-                    widget.dashboardState.setSelectedAutonomous(
-                        '$selectedMainCategory, $selectedSubCategory');
-                  });
-                },
-                items: autonModes[selectedMainCategory!]!
-                    .map<DropdownMenuItem<String>>((String subCategory) {
-                  return DropdownMenuItem<String>(
-                    value: subCategory,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(
-                        subCategory,
-                        style: TextStyle(fontSize: 36, fontFamily: "Cascadia Code"),
-                      ),
-                    ),
-                  );
-                }).toList(),
-                isExpanded: true,
-                underline: Container(), 
-              ),
-            ),
-          ],
         ],
       ),
     );

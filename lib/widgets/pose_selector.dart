@@ -1,4 +1,5 @@
 import 'package:accelerationstation/services/dashboard_state.dart';
+import 'package:accelerationstation/widgets/pose_checkbox.dart';
 import 'package:flutter/material.dart';
 
 class PoseSelector extends StatefulWidget {
@@ -8,220 +9,67 @@ class PoseSelector extends StatefulWidget {
   const PoseSelector({
     super.key,
     required this.dashboardState,
-    required this.redAlliance,
+    required this.redAlliance
   });
 
   @override
-  State<PoseSelector> createState() => PoseSelectorState();
+  State<PoseSelector> createState() => _PoseSelectorState();
 }
 
-class PoseSelectorState extends State<PoseSelector> {
-  int selected = 0;
+class _PoseSelectorState extends State<PoseSelector> {
+  int _selectedPoseId = -1;
+
+  final List<_PoseDefinition> _poses = const [
+    _PoseDefinition(id: 1, label: 'A', leftPercent: 0.5, topPercent: 0.5),
+    _PoseDefinition(id: 2, label: 'B', leftPercent: 0.75, topPercent: 0.5),
+    _PoseDefinition(id: 3, label: 'C', leftPercent: 0.5, topPercent: 0.25),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    Color activeColor = widget.redAlliance ? Colors.red[700]! : Colors.indigo;
-  
-    List<Map<String, double?>> posePositions = [
-      {'left': 220.0, 'bottom': 53.0},
-      {'right': 220.0, 'bottom': 53.0},
-      {'right': 114.0, 'bottom': 115.0},
-      {'right': 53.0, 'bottom': 222.0},
-      {'right': 53.0, 'top': 222.0},
-      {'right': 114.0, 'top': 115.0},
-      {'right': 220.0, 'top': 51.0},
-      {'left': 220.0, 'top': 51.0},
-      {'left': 114.0, 'top': 115.0},
-      {'left': 53.0, 'top': 222.0},
-      {'left': 53.0, 'bottom': 222.0},
-      {'left': 114.0, 'bottom': 115.0},
-    ];
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      final imageWidth = constraints.maxWidth;
+      final imageHeight = constraints.maxHeight;
 
-    return SizedBox(
-      width: 1920,
-      height: 1080,
-      child: Stack(
+      return Stack(
         children: [
-          buildReefSelector(posePositions, activeColor),
-          buildCoralStation(left: true, startPose: 25, activeColor: activeColor),
-          buildCoralStation(left: false, startPose: 28, activeColor: activeColor),
           Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 200),
-              child: Text(
-                'A',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
+            alignment: const Alignment(0, -0.5),
+            child: Image.asset('images/blue_reef.png')
+          ),
+          for (final pose in _poses)
+            Positioned(
+              left: pose.leftPercent * imageWidth - 20,
+              top: pose.topPercent * imageHeight - 35,
+              child: PoseCheckbox(
+                id: pose.id,
+                label: pose.label,
+                selectedId: _selectedPoseId,
+                redAlliance: widget.redAlliance,
+                dashboardState: widget.dashboardState,
+                onSelected: (id) {
+                  setState(() => _selectedPoseId = id);
+                },
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 350, right: 525),
-              child: Text(
-                'B',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 670, right: 525),
-              child: Text(
-                'C',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 820),
-              child: Text(
-                'D',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 670, left: 525),
-              child: Text(
-                'E',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 350, left: 525),
-              child: Text(
-                'F',
-                style: TextStyle(
-                  color: activeColor,
-                  fontFamily: "Cascadia Code",
-                  fontSize: 92,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildReefSelector(List<Map<String, double?>> positions, Color activeColor) {
-    return Positioned(
-      left: 660,
-      bottom: 275,
-      child: SizedBox(
-        width: 600,
-        height: 600,
-        child: Stack(
-          children: [
-            Image.asset(widget.redAlliance ? 'images/red_reef.png' : 'images/blue_reef.png'),
-            ...List.generate(positions.length, (index) {
-              return buildPoseCheckbox(
-                position: positions[index],
-                poseId: widget.redAlliance ? index + 13 : index + 1,
-                isReef: true,
-                activeColor: activeColor,
-              );
-            }),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
+}
 
-  Widget buildCoralStation({required bool left, required int startPose, required Color activeColor}) {
-    List<Map<String, double?>> positions = [
-      {left ? 'left' : 'right': 65.0, 'bottom': 198.0},
-      {left ? 'left' : 'right': 200.0, 'bottom': 118.0},
-      {left ? 'left' : 'right': 330.0, 'bottom': 40.0},
-    ];
+class _PoseDefinition {
+  final int id;
+  final String label;
+  final double leftPercent;
+  final double topPercent;
 
-    return Positioned(
-      left: left ? 0 : null,
-      right: left ? null : 0,
-      bottom: 0,
-      child: SizedBox(
-        width: 450,
-        height: 270,
-        child: Stack(
-          children: [
-            Transform.flip(
-              flipX: left,
-              child: Image.asset('images/coral_station.png'),
-            ),
-            ...List.generate(3, (index) {
-
-              return buildPoseCheckbox(
-                position: positions[index],
-                poseId: widget.redAlliance ? startPose + index : startPose + 6 + index,
-                isReef: false,
-                activeColor: activeColor,
-              );
-            }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildPoseCheckbox({required Map<String, double?> position, required int poseId, required bool isReef, required Color activeColor}) {
-    return Positioned(
-      left: position['left'],
-      right: position['right'],
-      top: position['top'],
-      bottom: position['bottom'],
-      child: Transform.scale(
-        scale: 5,
-        child: Checkbox(
-          value: selected == poseId,
-          splashRadius: 9,
-          checkColor: Colors.white,
-          activeColor: activeColor,
-          shape: const CircleBorder(),
-          side: const BorderSide(width: 0.5, color: Colors.grey),
-          onChanged: (value) {
-            setState(() {
-              if (value ?? false) {
-                selected = poseId;
-                if (!isReef) {
-                  widget.dashboardState.setTargetPose(selected);
-                } else {
-                  widget.dashboardState.setTargetPose(widget.redAlliance ? selected - 12 : selected);
-                }
-              }
-            });
-          },
-        ),
-      ),
-    );
-  }
+  const _PoseDefinition({
+    required this.id,
+    required this.label,
+    required this.leftPercent,
+    required this.topPercent,
+  });
 }
